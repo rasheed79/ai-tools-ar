@@ -1,0 +1,36 @@
+name: Update Exchange Rates
+
+on:
+  schedule:
+    # Once per day at 06:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-rates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch and store exchange rates
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          EXCHANGERATE_API_KEY: ${{ secrets.EXCHANGERATE_API_KEY }}
+        run: |
+          RATES=$(curl -sf \
+            "https://v6.exchangerate-api.com/v6/$EXCHANGERATE_API_KEY/latest/USD")
+
+          for CURRENCY in SAR EGP AED MAD KWD QAR BHD JOD; do
+            RATE=$(echo "$RATES" | python3 -c "
+          import json,sys
+          d=json.load(sys.stdin)
+          print(d['conversion_rates']['$CURRENCY'])
+          ")
+            curl -s -o /dev/null -X POST \
+              "$SUPABASE_URL/rest/v1/exchange_rates" \
+              -H "apikey: $SUPABASE_SERVICE_KEY" \
+              -H "Authorization: Bearer $SUPABASE_SERVICE_KEY" \
+              -H "Content-Type: application/json" \
+              -H "Prefer: resolution=merge-duplicates" \
+              -d "{\"currency\":\"$CURRENCY\",\"rate\":$RATE}"
+            echo "Updated $CURRENCY: $RATE"
+          done

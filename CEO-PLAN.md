@@ -165,3 +165,40 @@ jobs:
 - Cloudflare Pages deployment (يختلف قليلاً عن Vercel)
 - GitHub Actions YAML
 Claude Code يبني كل هذا — لكن اقرأ ما يكتب ولا تنشر blindly.
+
+<!-- /autoplan restore point: /c/Users/admin/.gstack/projects/ai-tools-ar/master-autoplan-restore-20260604-104743.md -->
+
+---
+
+## /autoplan Review — 2026-06-04
+
+### Decision Audit Trail
+
+| # | Phase | القرار | التصنيف | المبدأ | الرأي المرفوض |
+|---|-------|--------|---------|--------|---------------|
+| 1 | CEO | SSG كامل Phase 1 | Mechanical | P5 | ISR مبكر |
+| 2 | CEO | يدوي أولاً ثم أتمتة | Mechanical | P5 | أتمتة فورية |
+| 3 | CEO | USD تخزين + تحويل عرض | Mechanical | P5 | multi-currency storage |
+
+### User Challenges (لا يُقرر تلقائياً)
+- UC1: تحقق من Arabic search demand قبل البناء (Google Trends)
+- UC2: أضف kill trigger: الشهر 2 = <50 صفحة + <100 زيارة → pivot
+- UC3: Programmatic SEO + HelpfulContent risk → unique insight في كل صفحة
+
+### Critical Technical Fixes (يجب تطبيقها قبل البدء)
+1. CRITICAL: Arabic folder names على Windows → استخدم `app/tools/[slug]/page.tsx` + Next.js rewrites
+2. CRITICAL: `lib/supabase.ts` Cloudflare Workers compatible — لا تنسخ من Vercel tutorials
+3. CRITICAL: `.env.local.example` + توثيق 3 أماكن للـ env vars
+4. HIGH: Cron fix: `1,6,11,16,21,26` بدل `*/5`
+5. HIGH: Comparison pages → edge cache / dynamic (لا SSG)
+6. HIGH: `generateStaticParams` validation على فشل Supabase
+7. HIGH: Service role key في Actions (لا anon key)
+8. HIGH: `seed.sql` بـ 10 أدوات للتطوير المحلي
+
+### GSTACK REVIEW REPORT
+Status: DONE_WITH_CONCERNS
+CEO: 3 User Challenges surfaced
+Eng: 4 Critical/High findings
+DX: 4/10 score, 3 Critical blockers
+Phase 2 (Design): skip — تحتاج الكود أولاً
+Phase 3.5 (DX): DONE
