@@ -25,19 +25,18 @@ export default async function HomePage() {
         <p className="text-xl text-gray-600 mb-8">
           أسعار بعملتك المحلية · مقارنات تفصيلية · بدائل مجانية
         </p>
-        <form action="/api/newsletter" method="POST" className="flex gap-3 max-w-md mx-auto">
+        <form className="flex gap-3 max-w-md mx-auto">
           <input
             type="email"
             name="email"
             placeholder="بريدك الإلكتروني"
-            required
             className="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-right"
           />
           <button
             type="submit"
             className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
           >
-            اشترك
+            اشترك قريباً
           </button>
         </form>
       </section>
