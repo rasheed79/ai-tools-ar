@@ -5,7 +5,7 @@ import type { Tool } from '@/lib/database.types'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-export const revalidate = 86400
+export const dynamic = 'force-dynamic'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -20,14 +20,6 @@ async function getTool(slug: string): Promise<Tool | null> {
   return data as Tool
 }
 
-export async function generateStaticParams() {
-  const { data, error } = await supabase.from('tools').select('slug')
-  if (error || !data?.length) {
-    console.error('generateStaticParams: Supabase error or empty', error)
-    return []
-  }
-  return (data as { slug: string }[]).map((t) => ({ slug: t.slug }))
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params

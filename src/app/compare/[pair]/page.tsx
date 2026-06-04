@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { convertCurrency, FALLBACK_RATES } from '@/lib/currency'
 
 // Dynamic with edge caching — not SSG (avoids N^2 build explosion)
-export const revalidate = 86400
+export const dynamic = 'force-dynamic'
 
 type Props = { params: Promise<{ pair: string }> }
 

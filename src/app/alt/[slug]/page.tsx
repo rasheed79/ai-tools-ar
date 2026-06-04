@@ -4,15 +4,9 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
-export const revalidate = 86400
+export const dynamic = 'force-dynamic'
 
 type Props = { params: Promise<{ slug: string }> }
-
-export async function generateStaticParams() {
-  const { data, error } = await supabase.from('tools').select('slug')
-  if (error || !data?.length) return []
-  return (data as { slug: string }[]).map((t) => ({ slug: t.slug }))
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params

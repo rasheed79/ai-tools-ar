@@ -3,7 +3,7 @@ import type { Tool } from '@/lib/database.types'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'جميع أدوات الذكاء الاصطناعي',

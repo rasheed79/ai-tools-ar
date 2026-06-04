@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabase'
 import type { Tool } from '@/lib/database.types'
 import Link from 'next/link'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 async function getTools(): Promise<Tool[]> {
   const { data, error } = await supabase

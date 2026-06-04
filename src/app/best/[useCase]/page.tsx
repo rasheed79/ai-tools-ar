@@ -4,15 +4,9 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
-export const revalidate = 86400
-
-const USE_CASE_SLUGS = ['كتابة', 'تسويق', 'تعليم', 'برمجة', 'تصميم', 'فيديو', 'صوت', 'بحث', 'عمل', 'إبداع']
+export const dynamic = 'force-dynamic'
 
 type Props = { params: Promise<{ useCase: string }> }
-
-export async function generateStaticParams() {
-  return USE_CASE_SLUGS.map((uc) => ({ useCase: uc }))
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { useCase } = await params
