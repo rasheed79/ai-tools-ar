@@ -7,7 +7,7 @@ import { convertCurrency, FALLBACK_RATES } from '@/lib/currency'
 // Dynamic with edge caching — not SSG (avoids N^2 build explosion)
 export const revalidate = 86400
 
-type Props = { params: { pair: string } }
+type Props = { params: Promise<{ pair: string }> }
 
 async function getTwoTools(slugA: string, slugB: string): Promise<[Tool, Tool] | null> {
   const { data, error } = await supabase
@@ -23,7 +23,8 @@ async function getTwoTools(slugA: string, slugB: string): Promise<[Tool, Tool] |
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const [slugA, , slugB] = params.pair.split('-vs-')
+  const { pair } = await params
+  const [slugA, , slugB] = pair.split('-vs-')
   return {
     title: `${slugA} مقابل ${slugB} — مقارنة`,
     description: `مقارنة تفصيلية بين ${slugA} و${slugB} — الأسعار، المميزات، والأفضل لاستخدامك`,
@@ -33,7 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const USE_CASES = ['كتابة', 'تسويق', 'تعليم', 'برمجة', 'تصميم', 'فيديو', 'صوت']
 
 export default async function ComparePage({ params }: Props) {
-  const parts = params.pair.split('-vs-')
+  const { pair } = await params
+  const parts = pair.split('-vs-')
   if (parts.length !== 2) notFound()
   const [slugA, slugB] = parts
 

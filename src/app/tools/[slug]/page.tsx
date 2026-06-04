@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 
 export const revalidate = 86400
 
-type Props = { params: { slug: string } }
+type Props = { params: Promise<{ slug: string }> }
 
 async function getTool(slug: string): Promise<Tool | null> {
   const { data, error } = await supabase
@@ -30,7 +30,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const tool = await getTool(params.slug)
+  const { slug } = await params
+  const tool = await getTool(slug)
   if (!tool) return { title: 'أداة غير موجودة' }
   return {
     title: `${tool.name_ar} — مراجعة وأسعار`,
@@ -46,7 +47,8 @@ const CURRENCY_LABELS: Record<string, string> = {
 }
 
 export default async function ToolPage({ params }: Props) {
-  const tool = await getTool(params.slug)
+  const { slug } = await params
+  const tool = await getTool(slug)
   if (!tool) notFound()
 
   const jsonLd = buildJsonLd(tool)

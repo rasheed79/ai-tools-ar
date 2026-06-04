@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export const revalidate = 86400
 
-type Props = { params: { slug: string } }
+type Props = { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
   const { data, error } = await supabase.from('tools').select('slug')
@@ -15,9 +15,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
   return {
-    title: `بدائل ${params.slug} المجانية`,
-    description: `أفضل البدائل المجانية والمدفوعة لـ${params.slug} — مقارنة شاملة`,
+    title: `بدائل ${slug} المجانية`,
+    description: `أفضل البدائل المجانية والمدفوعة لـ${slug} — مقارنة شاملة`,
   }
 }
 
@@ -43,7 +44,8 @@ async function getAlternatives(slug: string): Promise<{ original: Tool; alts: To
 }
 
 export default async function AlternativesPage({ params }: Props) {
-  const result = await getAlternatives(params.slug)
+  const { slug } = await params
+  const result = await getAlternatives(slug)
   if (!result) notFound()
   const { original, alts } = result
 

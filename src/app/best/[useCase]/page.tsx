@@ -8,14 +8,15 @@ export const revalidate = 86400
 
 const USE_CASE_SLUGS = ['كتابة', 'تسويق', 'تعليم', 'برمجة', 'تصميم', 'فيديو', 'صوت', 'بحث', 'عمل', 'إبداع']
 
-type Props = { params: { useCase: string } }
+type Props = { params: Promise<{ useCase: string }> }
 
 export async function generateStaticParams() {
   return USE_CASE_SLUGS.map((uc) => ({ useCase: uc }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const decoded = decodeURIComponent(params.useCase)
+  const { useCase } = await params
+  const decoded = decodeURIComponent(useCase)
   return {
     title: `أفضل أدوات AI لـ${decoded}`,
     description: `أفضل أدوات الذكاء الاصطناعي لـ${decoded} — مقارنة شاملة بالأسعار والمميزات`,
@@ -35,8 +36,9 @@ async function getToolsByUseCase(useCase: string): Promise<Tool[]> {
 }
 
 export default async function BestToolsPage({ params }: Props) {
-  const decoded = decodeURIComponent(params.useCase)
-  const tools = await getToolsByUseCase(params.useCase)
+  const { useCase } = await params
+  const decoded = decodeURIComponent(useCase)
+  const tools = await getToolsByUseCase(useCase)
 
   if (!tools.length) notFound()
 
