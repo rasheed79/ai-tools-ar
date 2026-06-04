@@ -16,8 +16,8 @@ async function getTwoTools(slugA: string, slugB: string): Promise<[Tool, Tool] |
     .in('slug', [slugA, slugB])
 
   if (error || !data || data.length < 2) return null
-  const a = data.find((t) => t.slug === slugA) as Tool
-  const b = data.find((t) => t.slug === slugB) as Tool
+  const a = (data as Tool[]).find((t) => t.slug === slugA)
+  const b = (data as Tool[]).find((t) => t.slug === slugB)
   if (!a || !b) return null
   return [a, b]
 }

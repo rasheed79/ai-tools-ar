@@ -30,12 +30,28 @@ export type Comparison = {
   created_at: string
 }
 
+// Minimal Database type — avoids Supabase returning 'never' for select queries
 export type Database = {
   public: {
     Tables: {
-      tools: { Row: Tool; Insert: Omit<Tool, 'id' | 'created_at' | 'updated_at'>; Update: Partial<Tool> }
-      exchange_rates: { Row: ExchangeRate; Insert: Omit<ExchangeRate, 'updated_at'>; Update: Partial<ExchangeRate> }
-      comparisons: { Row: Comparison; Insert: Omit<Comparison, 'id' | 'created_at'>; Update: Partial<Comparison> }
+      tools: {
+        Row: Tool
+        Insert: Partial<Tool>
+        Update: Partial<Tool>
+      }
+      exchange_rates: {
+        Row: ExchangeRate
+        Insert: Partial<ExchangeRate>
+        Update: Partial<ExchangeRate>
+      }
+      comparisons: {
+        Row: Comparison
+        Insert: Partial<Comparison>
+        Update: Partial<Comparison>
+      }
     }
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
   }
 }
