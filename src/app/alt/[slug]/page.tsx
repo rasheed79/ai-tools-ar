@@ -11,7 +11,7 @@ type Props = { params: Promise<{ slug: string }> }
 export async function generateStaticParams() {
   const { data, error } = await supabase.from('tools').select('slug')
   if (error || !data?.length) return []
-  return data.map((t) => ({ slug: t.slug }))
+  return data.map((t: { slug: string }) => ({ slug: t.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
