@@ -11,11 +11,11 @@ Mode: Builder (Passive Income)
 ## What Makes This Cool
 - المنافسة العربية في AI tools content شبه معدومة
 - الموقع يولّد آلاف الصفحات تلقائياً بدون تدخل
-- Vercel + Supabase = صفر تكاليف استضافة
+- Cloudflare Pages + Supabase = صفر تكاليف استضافة
 - دخل مزدوج: AdSense + Affiliate links
 
 ## Constraints
-- استضافة مجانية فقط (Vercel/Netlify)
+- استضافة مجانية فقط (Cloudflare Pages — bandwidth غير محدود، 500 builds/شهر)
 - لا خبرة تقنية محددة — يبني بمساعدة Claude Code
 - يريد passive income حقيقي، ليس freelance
 
@@ -49,17 +49,22 @@ Mode: Builder (Passive Income)
 
 المكدس التقني:
 - Next.js 14 App Router
-- Vercel (hosting مجاني)
+- **Cloudflare Pages** + `@cloudflare/next-on-pages` adapter (hosting مجاني، bandwidth غير محدود)
 - Supabase free tier (قاعدة بيانات الأدوات)
-- OpenAI API ($5 لتوليد آلاف الصفحات)
+- OpenAI API ($5 لتوليد آلاف الصفحات — Phase 2)
 - Google AdSense + Affiliate links
+
+**ملاحظة حرجة للـ deploy:** Cloudflare Pages يحتاج:
+1. `npm install @cloudflare/next-on-pages`
+2. تعديل `package.json`: `"build": "next-on-pages"`
+3. ملف `wrangler.toml` مع `compatibility_flags = ["nodejs_compat"]`
 
 هيكل URL:
 ```
-/ادوات/[category]
-/مقارنة/[tool-a]-vs-[tool-b]
+/ادوات/[slug]                 ← slug باللاتيني دائماً
+/مقارنة/[slug-a]-vs-[slug-b]
 /افضل-ادوات/[use-case]
-/[tool-name]-بديل
+/[slug]-بديل
 ```
 
 ## Open Questions (Resolved)
@@ -81,35 +86,63 @@ Mode: Builder (Passive Income)
 - $100+/شهر بحلول الشهر السادس
 
 ## Distribution Plan
-- Vercel (auto-deploy من GitHub)
+- Cloudflare Pages (auto-deploy من GitHub)
 - Google Search Console (فهرسة)
 - سيتماب تلقائي من Next.js
-- لا CI/CD مطلوب — Vercel يتولى كل شيء
+- لا CI/CD مطلوب — Cloudflare Pages يتولى كل شيء
 
 ## Data Schema (Supabase)
 
+المرجع النهائي هو schema خطة CEO (الأحدث). يشمل حقوقاً إضافية:
+
 ```sql
 tools (
-  id          uuid primary key,
-  name        text,           -- "ChatGPT"
-  slug        text unique,    -- "chatgpt"
-  name_ar     text,           -- "تشات جي بي تي"
-  category    text,           -- "writing" | "image" | "code"
+  id             uuid primary key,
+  name           text,
+  slug           text unique,        -- "chatgpt" (latin دائماً)
+  name_ar        text,               -- "تشات جي بي تي"
+  category       text,               -- 'writing' | 'image' | 'code' | 'video' | 'audio'
   description_ar text,
-  pricing     text,           -- "مجاني" | "مدفوع" | "مجاني مع خطة مدفوعة"
-  price_from  numeric,
-  official_url text,
-  affiliate_url text,
-  features    jsonb,          -- ["ميزة 1", "ميزة 2"]
+  pricing        text,               -- 'مجاني' | 'مدفوع' | 'freemium'
+  price_from     numeric,
+  price_currency text default 'USD',
+  use_cases      text[],             -- ['كتابة', 'تسويق', 'تعليم']
+  official_url   text,
+  affiliate_url  text,
+  features       jsonb,              -- {"عربي": ["ميزة1"], "en": ["feature1"]}
+  is_free_tier   boolean,
+  created_at     timestamp,
+  updated_at     timestamp
+)
+
+exchange_rates (
+  currency    text primary key,      -- 'SAR', 'EGP', 'AED', 'MAD'
+  rate        numeric,               -- rate من USD
+  updated_at  timestamp
+)
+
+comparisons (
+  id          uuid primary key,
+  tool_a_slug text references tools(slug),
+  tool_b_slug text references tools(slug),
   created_at  timestamp
 )
 ```
 
+**ملاحظة أداء:** `lib/supabase.ts` يصدر singleton client واحد — كل الملفات تستورده ولا تنشئ client جديد.
+**ملاحظة جودة:** `features jsonb` هيكله `{"ar": [...], "en": [...]}` — منظّم ويدعم Phase 2 الأتمتة.
+
 ## Dependencies
-- حساب Vercel (مجاني)
-- حساب Supabase (مجاني)
-- حساب OpenAI ($5-10 للبداية)
+- حساب Cloudflare Pages (مجاني — bandwidth غير محدود)
+- حساب Supabase (مجاني — مع GitHub Actions keep-alive كل 5 أيام)
+- حساب OpenAI ($30-50 — Phase 2 فقط بعد أول دخل AdSense)
 - حساب Google AdSense (يحتاج 3+ أشهر وترافيك حقيقي)
+
+## Testing Requirements
+3 unit tests إلزامية (jest مع Next.js):
+- `convertCurrency(amount, rate)` — خطأ = أسعار خاطئة لكل مستخدم
+- `buildSlug(name)` — خطأ = sitemap مكسور
+- `buildJsonLd(tool)` — خطأ = Google ترفض الـ rich results
 
 ## The Assignment
 **هذا الأسبوع:** افتح Vercel واعمل deploy لـ Next.js project فارغ. بعدين أضف قاعدة بيانات أدوات بـ Supabase — 10 أدوات يدوياً فقط. لا تكتب محتوى بعد. الهدف: تأكّد إن الـ URL structure يشتغل وGoogle تقدر تفهرسه.
