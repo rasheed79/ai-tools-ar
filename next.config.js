@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+// build: 2026-06-04
 const nextConfig = {
   // Arabic URL paths work via rewrites — folder names stay ASCII (Windows-safe)
   async rewrites() {
