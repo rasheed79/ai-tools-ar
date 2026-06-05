@@ -1,0 +1,90 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "أدوات AI" [ref=e3] [cursor=pointer]:
+      - /url: /
+    - navigation [ref=e4]:
+      - link "جميع الأدوات" [ref=e5] [cursor=pointer]:
+        - /url: /tools
+      - link "مقارنة" [ref=e6] [cursor=pointer]:
+        - /url: /tools
+      - link "أفضل الأدوات" [ref=e7] [cursor=pointer]:
+        - /url: /best/%D9%83%D8%AA%D8%A7%D8%A8%D8%A9
+  - main [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - heading "دليل أدوات الذكاء الاصطناعي بالعربية" [level=1] [ref=e11]
+        - paragraph [ref=e12]: أسعار بعملتك المحلية · مقارنات تفصيلية · بدائل مجانية
+        - generic [ref=e13]:
+          - textbox "بريدك الإلكتروني" [ref=e14]
+          - button "اشترك" [ref=e15] [cursor=pointer]
+      - generic [ref=e16]:
+        - heading "أبرز الأدوات" [level=2] [ref=e17]
+        - generic [ref=e18]:
+          - link "تشات جي بي تي freemium مساعد ذكاء اصطناعي من OpenAI للكتابة والمحادثة وحل المسائل. الأشهر في العالم. من $20/شهر" [ref=e19] [cursor=pointer]:
+            - /url: /tools/chatgpt
+            - generic [ref=e20]:
+              - heading "تشات جي بي تي" [level=3] [ref=e21]
+              - generic [ref=e22]: freemium
+            - paragraph [ref=e23]: مساعد ذكاء اصطناعي من OpenAI للكتابة والمحادثة وحل المسائل. الأشهر في العالم.
+            - paragraph [ref=e24]: من $20/شهر
+          - link "جيميني freemium مساعد الذكاء الاصطناعي من Google. مجاني بالكامل مع دعم جيد للعربية. من $20/شهر" [ref=e25] [cursor=pointer]:
+            - /url: /tools/gemini
+            - generic [ref=e26]:
+              - heading "جيميني" [level=3] [ref=e27]
+              - generic [ref=e28]: freemium
+            - paragraph [ref=e29]: مساعد الذكاء الاصطناعي من Google. مجاني بالكامل مع دعم جيد للعربية.
+            - paragraph [ref=e30]: من $20/شهر
+          - link "ميدجورني مدفوع أفضل أداة لتوليد الصور بالذكاء الاصطناعي. جودة استثنائية للتصميم والفن الرقمي. من $10/شهر" [ref=e31] [cursor=pointer]:
+            - /url: /tools/midjourney
+            - generic [ref=e32]:
+              - heading "ميدجورني" [level=3] [ref=e33]
+              - generic [ref=e34]: مدفوع
+            - paragraph [ref=e35]: أفضل أداة لتوليد الصور بالذكاء الاصطناعي. جودة استثنائية للتصميم والفن الرقمي.
+            - paragraph [ref=e36]: من $10/شهر
+          - link "كلود freemium مساعد Anthropic للكتابة والتحليل. يتميز بفهم السياق الطويل وكتابة نصوص عالية الجودة. من $20/شهر" [ref=e37] [cursor=pointer]:
+            - /url: /tools/claude
+            - generic [ref=e38]:
+              - heading "كلود" [level=3] [ref=e39]
+              - generic [ref=e40]: freemium
+            - paragraph [ref=e41]: مساعد Anthropic للكتابة والتحليل. يتميز بفهم السياق الطويل وكتابة نصوص عالية الجودة.
+            - paragraph [ref=e42]: من $20/شهر
+          - link "دالي 3 مدفوع مولّد الصور من OpenAI. متاح عبر ChatGPT Plus ومباشرة عبر API. من $20/شهر" [ref=e43] [cursor=pointer]:
+            - /url: /tools/dalle-3
+            - generic [ref=e44]:
+              - heading "دالي 3" [level=3] [ref=e45]
+              - generic [ref=e46]: مدفوع
+            - paragraph [ref=e47]: مولّد الصور من OpenAI. متاح عبر ChatGPT Plus ومباشرة عبر API.
+            - paragraph [ref=e48]: من $20/شهر
+          - link "بيربلكسيتي freemium محرك بحث بالذكاء الاصطناعي. يجيب بمصادر موثقة. بديل ذكي لـ Google. من $20/شهر" [ref=e49] [cursor=pointer]:
+            - /url: /tools/perplexity
+            - generic [ref=e50]:
+              - heading "بيربلكسيتي" [level=3] [ref=e51]
+              - generic [ref=e52]: freemium
+            - paragraph [ref=e53]: محرك بحث بالذكاء الاصطناعي. يجيب بمصادر موثقة. بديل ذكي لـ Google.
+            - paragraph [ref=e54]: من $20/شهر
+          - link "كوبايلوت مدفوع مساعد البرمجة من GitHub وMicrosoft. يكمل الكود تلقائياً في أي IDE. من $10/شهر" [ref=e55] [cursor=pointer]:
+            - /url: /tools/github-copilot
+            - generic [ref=e56]:
+              - heading "كوبايلوت" [level=3] [ref=e57]
+              - generic [ref=e58]: مدفوع
+            - paragraph [ref=e59]: مساعد البرمجة من GitHub وMicrosoft. يكمل الكود تلقائياً في أي IDE.
+            - paragraph [ref=e60]: من $10/شهر
+          - link "إيليفن لابس freemium أفضل أداة لتحويل النص لصوت. أصوات واقعية جداً وتدعم العربية. من $5/شهر" [ref=e61] [cursor=pointer]:
+            - /url: /tools/elevenlabs
+            - generic [ref=e62]:
+              - heading "إيليفن لابس" [level=3] [ref=e63]
+              - generic [ref=e64]: freemium
+            - paragraph [ref=e65]: أفضل أداة لتحويل النص لصوت. أصوات واقعية جداً وتدعم العربية.
+            - paragraph [ref=e66]: من $5/شهر
+          - link "رانواي freemium أقوى أداة لتوليد وتحرير الفيديو بالذكاء الاصطناعي. تحويل الصور لفيديو. من $12/شهر" [ref=e67] [cursor=pointer]:
+            - /url: /tools/runway
+            - generic [ref=e68]:
+              - heading "رانواي" [level=3] [ref=e69]
+              - generic [ref=e70]: freemium
+            - paragraph [ref=e71]: أقوى أداة لتوليد وتحرير الفيديو بالذكاء الاصطناعي. تحويل الصور لفيديو.
+            - paragraph [ref=e72]: من $12/شهر
+        - link "عرض جميع الأدوات →" [ref=e74] [cursor=pointer]:
+          - /url: /tools
+  - contentinfo [ref=e75]:
+    - paragraph [ref=e76]: © 2026 أدوات AI — دليل أدوات الذكاء الاصطناعي بالعربية
+  - alert [ref=e77]
