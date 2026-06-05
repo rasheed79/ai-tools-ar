@@ -38,6 +38,23 @@
 
 ---
 
+### T7: Cloudflare KV لأسعار العملات
+**ما:** استبدال in-memory cache (معطل في Workers) بـ Cloudflare KV
+**لماذا:** cachedRates module-level var = dead code في Workers isolate environment
+**السياق:** FALLBACK_RATES تكفي Phase 1. KV مطلوب عند تفعيل getRates() فعلاً.
+**الجهد:** M (بشري: يوم / CC: 30 دقيقة)
+**الأولوية:** P2 (بعد Phase 1 content)
+**يعتمد على:** Cloudflare Workers KV binding setup
+
+### T8: pagination في /tools page
+**ما:** إضافة pagination لصفحة جميع الأدوات (حالياً: unbounded query)
+**لماذا:** عند 200+ أداة، SELECT * بدون LIMIT يُرجع MB من البيانات في request واحد
+**الجهد:** M (بشري: 3 ساعات / CC: 15 دقيقة)
+**الأولوية:** P2 (عند >100 أداة)
+**يعتمد على:** وصول 100+ أداة
+
+---
+
 ## P3 — تتبع لاحق
 
 ### T4: API عام للبيانات للمطورين العرب

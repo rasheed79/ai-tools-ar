@@ -166,19 +166,33 @@ jobs:
 - GitHub Actions YAML
 Claude Code يبني كل هذا — لكن اقرأ ما يكتب ولا تنشر blindly.
 
-<!-- /autoplan restore point: /c/Users/admin/.gstack/projects/ai-tools-ar/master-autoplan-restore-20260604-104743.md -->
+<!-- /autoplan restore point: /c/Users/admin/.gstack/projects/ai-tools-ar/master-autoplan-restore-20260604-142457.md -->
 
 ---
 
-## /autoplan Review — 2026-06-04
+## /autoplan Review — 2026-06-04 (Second Run — بالعربي)
 
-### Decision Audit Trail
+### Decision Audit Trail (2026-06-04 — Run 2)
 
 | # | Phase | القرار | التصنيف | المبدأ | الرأي المرفوض |
 |---|-------|--------|---------|--------|---------------|
-| 1 | CEO | SSG كامل Phase 1 | Mechanical | P5 | ISR مبكر |
-| 2 | CEO | يدوي أولاً ثم أتمتة | Mechanical | P5 | أتمتة فورية |
-| 3 | CEO | USD تخزين + تحويل عرض | Mechanical | P5 | multi-currency storage |
+| 1 | CEO | Approach A: إصلاح + إكمال (لا تبديل stack) | Mechanical | P3 | Approach B/C: تبديل لـ Pages/Vercel |
+| 2 | CEO | cherry-pick: مراجعات دعم العربية في كل أداة | Taste | P1 | محتوى template فقط |
+| 3 | CEO | cherry-pick: affiliate links حقيقية | Mechanical | P6 | أفلييت بدون برامج حقيقية |
+| 4 | CEO | cherry-pick: Twitter/YouTube summary posts | Taste | P6 | SEO فقط |
+| 5 | CEO | cherry-pick: kill trigger الشهر 2 | Mechanical | P3 | استمرار بدون معايير |
+| 6 | CEO | Cloudflare KV مؤجل → TODOS.md | Mechanical | P5 | KV فوراً |
+| 7 | Eng | force-dynamic → revalidate للأدوات | Mechanical | P1+P5 | إبقاء force-dynamic |
+| 8 | Eng | getRates() dead code → حذف | Mechanical | P5 | Cloudflare KV |
+| 9 | Eng | generateMetadata undefined slugB → FIX | Mechanical | P5 | ترك |
+| 10 | Eng | XSS JSON-LD → escape | Mechanical | P1 | بدون sanitization |
+| 11 | Eng | tools/page.tsx → .limit(100) | Mechanical | P1 | unbounded |
+| 12 | Eng | compare nav 404 → page بسيطة | Mechanical | P5 | حذف |
+| 13 | Eng | use-case filter → 'use client' | Mechanical | P5 | إبقاء dead UI |
+| 14 | DX | README.md مطلوب | Mechanical | P1 | بدون توثيق |
+| 15 | DX | env guard في supabase.ts | Mechanical | P1 | silent fail |
+| 16 | DX | توحيد URL → NEXT_PUBLIC_SITE_URL | Mechanical | P5 | hardcoded 3 URLs |
+| 17 | DX | حذف EXCHANGERATE_API_KEY المهمل | Mechanical | P5 | إبقاء orphaned var |
 
 ### User Challenges (لا يُقرر تلقائياً)
 - UC1: تحقق من Arabic search demand قبل البناء (Google Trends)
