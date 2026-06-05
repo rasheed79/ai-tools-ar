@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabase'
 import type { Tool } from '@/lib/database.types'
 import Link from 'next/link'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 async function getTools(): Promise<Tool[]> {
   const { data, error } = await supabase
@@ -34,9 +34,10 @@ export default async function HomePage() {
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+            disabled
+            className="bg-gray-400 text-white px-6 py-2 rounded-lg cursor-not-allowed"
           >
-            اشترك قريباً
+            قريباً
           </button>
         </form>
       </section>

@@ -3,7 +3,7 @@ import type { Tool } from '@/lib/database.types'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'جميع أدوات الذكاء الاصطناعي',
@@ -19,7 +19,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 }
 
 async function getAllTools(): Promise<Tool[]> {
-  const { data, error } = await supabase.from('tools').select('*').order('name')
+  const { data, error } = await supabase.from('tools').select('*').order('name').limit(100)
   if (error || !data) return []
   return data as Tool[]
 }

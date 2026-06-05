@@ -4,15 +4,21 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 86400
 
 type Props = { params: Promise<{ slug: string }> }
 
+async function getToolName(slug: string): Promise<string> {
+  const { data } = await supabase.from('tools').select('name_ar').eq('slug', slug).single()
+  return (data as { name_ar: string } | null)?.name_ar ?? slug
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
+  const name = await getToolName(slug)
   return {
-    title: `بدائل ${slug} المجانية`,
-    description: `أفضل البدائل المجانية والمدفوعة لـ${slug} — مقارنة شاملة`,
+    title: `بدائل ${name} المجانية`,
+    description: `أفضل البدائل المجانية والمدفوعة لـ${name} — مقارنة شاملة`,
   }
 }
 
@@ -26,7 +32,7 @@ async function getAlternatives(slug: string): Promise<{ original: Tool; alts: To
   if (!originalData) return null
   const original = originalData as Tool
 
-  const { data: altsData } = await supabase
+  const { data: altsData, error: altsError } = await supabase
     .from('tools')
     .select('*')
     .eq('category', original.category)
@@ -34,6 +40,7 @@ async function getAlternatives(slug: string): Promise<{ original: Tool; alts: To
     .order('is_free_tier', { ascending: false })
     .limit(6)
 
+  if (altsError) console.error('alts query failed:', altsError.message)
   return { original, alts: (altsData as Tool[]) ?? [] }
 }
 

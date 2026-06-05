@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 86400
 
 type Props = { params: Promise<{ useCase: string }> }
 
@@ -17,8 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-async function getToolsByUseCase(useCase: string): Promise<Tool[]> {
-  const decoded = decodeURIComponent(useCase)
+async function getToolsByUseCase(decoded: string): Promise<Tool[]> {
   const { data, error } = await supabase
     .from('tools')
     .select('*')
@@ -32,7 +31,7 @@ async function getToolsByUseCase(useCase: string): Promise<Tool[]> {
 export default async function BestToolsPage({ params }: Props) {
   const { useCase } = await params
   const decoded = decodeURIComponent(useCase)
-  const tools = await getToolsByUseCase(useCase)
+  const tools = await getToolsByUseCase(decoded)
 
   if (!tools.length) notFound()
 
