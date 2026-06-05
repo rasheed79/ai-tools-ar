@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-export const runtime = 'edge'
-
 const RESEND_API = 'https://api.resend.com'
 const RESEND_AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID ?? ''
 
