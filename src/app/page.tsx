@@ -1,6 +1,7 @@
 import { supabase } from '@/lib/supabase'
 import type { Tool } from '@/lib/database.types'
 import Link from 'next/link'
+import NewsletterForm from '@/components/NewsletterForm'
 
 export const revalidate = 3600
 
@@ -25,21 +26,7 @@ export default async function HomePage() {
         <p className="text-xl text-gray-600 mb-8">
           أسعار بعملتك المحلية · مقارنات تفصيلية · بدائل مجانية
         </p>
-        <form className="flex gap-3 max-w-md mx-auto">
-          <input
-            type="email"
-            name="email"
-            placeholder="بريدك الإلكتروني"
-            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-right"
-          />
-          <button
-            type="submit"
-            disabled
-            className="bg-gray-400 text-white px-6 py-2 rounded-lg cursor-not-allowed"
-          >
-            قريباً
-          </button>
-        </form>
+        <NewsletterForm />
       </section>
 
       <section>
