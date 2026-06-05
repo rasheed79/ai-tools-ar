@@ -6,11 +6,7 @@ export const metadata: Metadata = {
   description: 'دليل أدوات الذكاء الاصطناعي بالعربية — أسعار بعملتك المحلية، مقارنات، بدائل مجانية',
   alternates: {
     languages: {
-      'ar-SA': 'https://ai-tools-ar.pages.dev',
-      'ar-EG': 'https://ai-tools-ar.pages.dev',
-      'ar-AE': 'https://ai-tools-ar.pages.dev',
-      'ar-MA': 'https://ai-tools-ar.pages.dev',
-      'x-default': 'https://ai-tools-ar.pages.dev',
+      'ar': process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ai-tools-ar.pages.dev',
     },
   },
 }
@@ -23,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <a href="/" className="text-xl font-bold text-blue-600">أدوات AI</a>
           <nav className="flex gap-6 text-sm">
             <a href="/tools" className="hover:text-blue-600">جميع الأدوات</a>
-            <a href="/compare" className="hover:text-blue-600">مقارنة</a>
+            <a href="/tools" className="hover:text-blue-600">مقارنة</a>
             <a href="/best/writing" className="hover:text-blue-600">أفضل الأدوات</a>
           </nav>
         </header>
