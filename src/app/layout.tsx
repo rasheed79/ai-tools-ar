@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav className="flex gap-6 text-sm">
             <a href="/tools" className="hover:text-blue-600">جميع الأدوات</a>
             <a href="/tools" className="hover:text-blue-600">مقارنة</a>
-            <a href="/best/writing" className="hover:text-blue-600">أفضل الأدوات</a>
+            <a href="/best/%D9%83%D8%AA%D8%A7%D8%A8%D8%A9" className="hover:text-blue-600">أفضل الأدوات</a>
           </nav>
         </header>
         <main className="max-w-4xl mx-auto px-4 py-8">{children}</main>
