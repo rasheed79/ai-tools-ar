@@ -2,15 +2,7 @@
 
 ## P1 — يمنع الشحن
 
-### T1: معالجة فشل Newsletter (silent failure)
-**ما:** إضافة error logging + تنبيه عند فشل إرسال Resend newsletter
-**لماذا:** فشل صامت — مشترك يشترك ولا يصله شيء بدون أي تنبيه
-**الإيجابيات:** لا تخسر مشتركين بصمت
-**السلبيات:** ثلاثة أسطر كود إضافية
-**السياق:** Resend free tier = 100 email/day. إذا انتهت الحصة أو فشل الإرسال، لا logging موجود حالياً. ابنه عند إعداد newsletter في Phase 1.
-**الجهد:** S (بشري: ساعة / CC: 5 دقائق)
-**الأولوية:** P1
-**يعتمد على:** إعداد newsletter أولاً
+*(لا يوجد — جميع عناصر P1 مكتملة)*
 
 ---
 
@@ -83,3 +75,13 @@
 **الجهد:** L (بشري: أسبوع / CC: ساعتان)
 **الأولوية:** P3
 **يعتمد على:** وصول 5000+ صفحة
+
+---
+
+## Completed
+
+### T1: Newsletter API + Form — مكتمل v0.0.0.0 (2026-06-05)
+`/api/subscribe` edge route بـ Resend HTTP API. error logging صريح. `NewsletterForm` client component مع loading/success/error states. وُصل بالصفحة الرئيسية.
+
+### P1 Autoplan fixes — مكتمل v0.0.0.0 (2026-06-05)
+XSS في JSON-LD، compare undefined slug، force-dynamic → revalidate، getRates() dead code، env guard، hreflang، broken links، unbounded query.
