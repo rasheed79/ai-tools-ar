@@ -1,8 +1,9 @@
 # deps
 /node_modules
 
-# next
+# next / cloudflare build output
 /.next/
+/.open-next/
 /out/
 .vercel/
 
