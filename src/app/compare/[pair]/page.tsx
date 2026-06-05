@@ -4,8 +4,9 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { convertCurrency, FALLBACK_RATES } from '@/lib/currency'
 
-// Dynamic with edge caching — not SSG (avoids N^2 build explosion)
+// force-dynamic: currency rates need freshness; compare pages not SSG-able (N^2 combinations)
 export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 type Props = { params: Promise<{ pair: string }> }
 
@@ -24,7 +25,7 @@ async function getTwoTools(slugA: string, slugB: string): Promise<[Tool, Tool] |
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pair } = await params
-  const [slugA, , slugB] = pair.split('-vs-')
+  const [slugA, slugB] = pair.split('-vs-')
   return {
     title: `${slugA} مقابل ${slugB} — مقارنة`,
     description: `مقارنة تفصيلية بين ${slugA} و${slugB} — الأسعار، المميزات، والأفضل لاستخدامك`,
@@ -52,17 +53,18 @@ export default async function ComparePage({ params }: Props) {
       </h1>
       <p className="text-gray-500 mb-8">مقارنة تفصيلية — اختر الأنسب لاحتياجاتك</p>
 
-      {/* Use case filter */}
+      {/* Use case filter — links to best/[useCase] pages */}
       <section className="mb-8">
-        <p className="text-sm text-gray-600 mb-3">فلتر حسب الاستخدام:</p>
+        <p className="text-sm text-gray-600 mb-3">تصفح حسب الاستخدام:</p>
         <div className="flex flex-wrap gap-2">
           {USE_CASES.map((uc) => (
-            <button
+            <a
               key={uc}
+              href={`/best/${encodeURIComponent(uc)}`}
               className="text-sm px-3 py-1 rounded-full border border-gray-300 hover:bg-blue-50 hover:border-blue-300"
             >
               {uc}
-            </button>
+            </a>
           ))}
         </div>
       </section>

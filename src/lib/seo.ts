@@ -23,9 +23,7 @@ export function buildJsonLd(tool: Tool): object {
       '@type': 'Offer',
       price: tool.price_from ?? 0,
       priceCurrency: 'USD',
-      availability: tool.is_free_tier
-        ? 'https://schema.org/InStock'
-        : 'https://schema.org/PreOrder',
+      availability: 'https://schema.org/InStock',
     },
     url: tool.official_url,
   }

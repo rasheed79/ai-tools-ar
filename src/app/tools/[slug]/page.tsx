@@ -5,7 +5,7 @@ import type { Tool } from '@/lib/database.types'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 86400
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -49,7 +49,7 @@ export default async function ToolPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026') }}
       />
       <article>
         <div className="flex items-center justify-between mb-6">
@@ -128,7 +128,7 @@ export default async function ToolPage({ params }: Props) {
             جرّب الأداة
           </a>
           <a
-            href={`/tools/${tool.slug}-vs`}
+            href={`/tools?compare=${tool.slug}`}
             className="border border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50"
           >
             قارن مع أداة أخرى
