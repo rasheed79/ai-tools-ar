@@ -39,7 +39,7 @@ export default async function BestToolsPage({ params }: Props) {
     <div>
       <h1 className="text-3xl font-bold mb-2">أفضل أدوات AI لـ{decoded}</h1>
       <p className="text-gray-500 mb-8">
-        {tools.length} أداة — مرتبة من الأفضل للاستخدام
+        {tools.length} {tools.length === 1 ? 'أداة' : tools.length <= 10 ? 'أدوات' : 'أداة'} — مرتبة من الأفضل للاستخدام
       </p>
 
       <div className="space-y-4">
