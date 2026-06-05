@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
+    "esbuild": "^0.28.0",
     "next": "15.2.0",
     "react": "^18",
     "react-dom": "^18"
@@ -24,7 +25,6 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
-    "esbuild": "^0.28.0",
     "eslint": "^8",
     "eslint-config-next": "15.2.0",
     "jest": "^29",
