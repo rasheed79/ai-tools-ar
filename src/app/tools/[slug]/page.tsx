@@ -15,11 +15,9 @@ async function getTool(slug: string): Promise<Tool | null> {
     .select('*')
     .eq('slug', slug)
     .single()
-
   if (error || !data) return null
   return data as Tool
 }
-
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
@@ -49,67 +47,137 @@ export default async function ToolPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026') }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd)
+            .replace(/</g, '\\u003c')
+            .replace(/>/g, '\\u003e')
+            .replace(/&/g, '\\u0026'),
+        }}
       />
       <article>
-        <div className="flex items-center justify-between mb-6">
+        {/* Header */}
+        <div className="flex items-start justify-between mb-6 gap-4">
           <div>
-            <h1 className="text-3xl font-bold">{tool.name_ar}</h1>
-            <p className="text-gray-500 mt-1">{tool.name}</p>
+            <h1
+              className="font-cairo font-bold text-text mb-1"
+              style={{ fontSize: '36px', lineHeight: 1.2 }}
+            >
+              {tool.name_ar}
+            </h1>
+            <p
+              className="font-jakarta text-muted"
+              style={{ fontSize: '14px' }}
+            >
+              {tool.name}
+            </p>
           </div>
-          <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-            tool.is_free_tier ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
-          }`}>
+          <span
+            className="font-jakarta font-medium flex-shrink-0 mt-1"
+            style={{
+              fontSize: '12px',
+              padding: '4px 14px',
+              borderRadius: 'var(--radius-sm)',
+              ...(tool.is_free_tier
+                ? {
+                    backgroundColor: 'rgba(76,175,125,0.12)',
+                    color: 'var(--success)',
+                    border: '1px solid rgba(76,175,125,0.3)',
+                  }
+                : {
+                    backgroundColor: 'rgba(232,160,64,0.12)',
+                    color: 'var(--accent)',
+                    border: '1px solid rgba(232,160,64,0.3)',
+                  }),
+            }}
+          >
             {tool.pricing}
           </span>
         </div>
 
-        <p className="text-lg text-gray-700 mb-8">{tool.description_ar}</p>
+        <p
+          className="font-cairo text-muted mb-10"
+          style={{ fontSize: '16px', lineHeight: 1.7 }}
+        >
+          {tool.description_ar}
+        </p>
 
+        {/* Pricing section */}
         {tool.price_from && (
-          <section className="bg-gray-50 rounded-xl p-6 mb-8">
-            <h2 className="text-xl font-semibold mb-4">الأسعار بعملتك المحلية</h2>
+          <section
+            className="rounded-md p-6 mb-8"
+            style={{
+              backgroundColor: 'var(--surface)',
+              border: '1px solid var(--border)',
+            }}
+          >
+            <h2 className="font-cairo font-semibold text-text text-xl mb-5">
+              الأسعار بعملتك المحلية
+            </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {Object.entries(CURRENCY_LABELS).map(([currency, label]) => {
                 const rate = FALLBACK_RATES[currency] ?? 1
                 const price = convertCurrency(tool.price_from!, rate)
                 return (
-                  <div key={currency} className="text-center">
-                    <p className="text-2xl font-bold text-blue-600">{price}</p>
-                    <p className="text-sm text-gray-500">{label}/شهر</p>
+                  <div
+                    key={currency}
+                    className="text-center p-4 rounded-md"
+                    style={{
+                      backgroundColor: 'var(--surface-2)',
+                      border: '1px solid var(--border)',
+                    }}
+                  >
+                    <p
+                      className="font-mono font-medium text-accent mb-1"
+                      style={{ fontSize: '22px', fontVariantNumeric: 'tabular-nums' }}
+                    >
+                      {price}
+                    </p>
+                    <p className="font-cairo text-muted text-sm">{label}/شهر</p>
                   </div>
                 )
               })}
             </div>
-            <p className="text-xs text-gray-400 mt-3">
+            <p
+              className="font-cairo text-muted mt-4"
+              style={{ fontSize: '12px' }}
+            >
               * الأسعار تقريبية، من ${tool.price_from} USD/شهر
             </p>
           </section>
         )}
 
+        {/* Features */}
         {tool.features?.ar?.length > 0 && (
           <section className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">أبرز المميزات</h2>
+            <h2 className="font-cairo font-semibold text-text text-xl mb-4">أبرز المميزات</h2>
             <ul className="space-y-2">
-              {tool.features.ar.map((f, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  <span>{f}</span>
+              {tool.features.ar.map((f: string, i: number) => (
+                <li key={i} className="flex items-start gap-3 font-cairo text-muted" style={{ fontSize: '14px' }}>
+                  <span className="text-success mt-0.5 flex-shrink-0">✓</span>
+                  {f}
                 </li>
               ))}
             </ul>
           </section>
         )}
 
+        {/* Use cases */}
         {tool.use_cases?.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">مناسبة لـ</h2>
+          <section className="mb-10">
+            <h2 className="font-cairo font-semibold text-text text-xl mb-4">مناسبة لـ</h2>
             <div className="flex flex-wrap gap-2">
-              {tool.use_cases.map((uc) => (
+              {tool.use_cases.map((uc: string) => (
                 <a
                   key={uc}
                   href={`/best/${uc}`}
-                  className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm hover:bg-blue-100"
+                  className="font-cairo text-muted no-underline hover:text-text transition-colors duration-150"
+                  style={{
+                    fontSize: '13px',
+                    padding: '5px 14px',
+                    borderRadius: 'var(--radius-sm)',
+                    backgroundColor: 'var(--surface)',
+                    border: '1px solid var(--border)',
+                  }}
                 >
                   {uc}
                 </a>
@@ -118,24 +186,43 @@ export default async function ToolPage({ params }: Props) {
           </section>
         )}
 
-        <div className="flex gap-4">
+        {/* CTA buttons */}
+        <div className="flex flex-wrap gap-3">
           <a
             href={tool.affiliate_url ?? tool.official_url}
             target="_blank"
             rel="noopener noreferrer nofollow"
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+            className="font-cairo font-bold text-sm no-underline hover:brightness-110 transition-all duration-150"
+            style={{
+              backgroundColor: 'var(--accent)',
+              color: '#0F1117',
+              padding: '12px 28px',
+              borderRadius: 'var(--radius-sm)',
+            }}
           >
-            جرّب الأداة
+            جرّب الأداة ←
           </a>
           <a
             href={`/tools?compare=${tool.slug}`}
-            className="border border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50"
+            className="font-cairo font-bold text-sm no-underline text-text hover:border-accent hover:text-accent transition-colors duration-150"
+            style={{
+              backgroundColor: 'var(--surface)',
+              border: '1px solid var(--border)',
+              padding: '12px 28px',
+              borderRadius: 'var(--radius-sm)',
+            }}
           >
             قارن مع أداة أخرى
           </a>
           <a
             href={`/alt/${tool.slug}`}
-            className="border border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50"
+            className="font-cairo font-bold text-sm no-underline text-muted hover:text-text transition-colors duration-150"
+            style={{
+              backgroundColor: 'var(--surface)',
+              border: '1px solid var(--border)',
+              padding: '12px 28px',
+              borderRadius: 'var(--radius-sm)',
+            }}
           >
             بدائل مجانية
           </a>

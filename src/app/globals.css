@@ -43,4 +43,7 @@
     font-family: 'Geist Mono', monospace;
     font-variant-numeric: tabular-nums;
   }
+  .card-hover:hover {
+    border-color: var(--accent) !important;
+  }
 }

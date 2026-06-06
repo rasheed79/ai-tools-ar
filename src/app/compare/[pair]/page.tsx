@@ -4,7 +4,6 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { convertCurrency, FALLBACK_RATES } from '@/lib/currency'
 
-// force-dynamic: currency rates need freshness; compare pages not SSG-able (N^2 combinations)
 export const dynamic = 'force-dynamic'
 export const revalidate = 3600
 
@@ -15,7 +14,6 @@ async function getTwoTools(slugA: string, slugB: string): Promise<[Tool, Tool] |
     .from('tools')
     .select('*')
     .in('slug', [slugA, slugB])
-
   if (error || !data || data.length < 2) return null
   const a = (data as Tool[]).find((t) => t.slug === slugA)
   const b = (data as Tool[]).find((t) => t.slug === slugB)
@@ -57,22 +55,105 @@ export default async function ComparePage({ params }: Props) {
 
   const sarRate = FALLBACK_RATES['SAR']
 
+  const rows: { label: string; a: React.ReactNode; b: React.ReactNode }[] = [
+    {
+      label: 'السعر',
+      a: toolA.is_free_tier ? (
+        <span className="text-success font-semibold font-cairo">مجاني</span>
+      ) : toolA.price_from ? (
+        <div className="font-cairo">
+          <span style={{ fontFamily: "'Geist Mono', monospace", fontSize: '15px', color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>
+            ${toolA.price_from}/شهر
+          </span>
+          <br />
+          <span className="text-muted text-xs">({convertCurrency(toolA.price_from, sarRate)} ريال)</span>
+        </div>
+      ) : <span className="text-muted">—</span>,
+      b: toolB.is_free_tier ? (
+        <span className="text-success font-semibold font-cairo">مجاني</span>
+      ) : toolB.price_from ? (
+        <div className="font-cairo">
+          <span style={{ fontFamily: "'Geist Mono', monospace", fontSize: '15px', color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>
+            ${toolB.price_from}/شهر
+          </span>
+          <br />
+          <span className="text-muted text-xs">({convertCurrency(toolB.price_from, sarRate)} ريال)</span>
+        </div>
+      ) : <span className="text-muted">—</span>,
+    },
+    {
+      label: 'الفئة',
+      a: <span className="font-cairo text-muted text-sm">{CATEGORY_AR[toolA.category] ?? toolA.category}</span>,
+      b: <span className="font-cairo text-muted text-sm">{CATEGORY_AR[toolB.category] ?? toolB.category}</span>,
+    },
+    {
+      label: 'طبقة مجانية',
+      a: toolA.is_free_tier
+        ? <span className="text-success text-lg">✓</span>
+        : <span className="text-error text-lg opacity-60">✕</span>,
+      b: toolB.is_free_tier
+        ? <span className="text-success text-lg">✓</span>
+        : <span className="text-error text-lg opacity-60">✕</span>,
+    },
+    {
+      label: 'أبرز المميزات',
+      a: (
+        <ul className="space-y-1.5">
+          {toolA.features?.ar?.slice(0, 3).map((f: string, i: number) => (
+            <li key={i} className="font-cairo text-muted text-sm flex items-start gap-2">
+              <span className="text-success flex-shrink-0 mt-0.5">•</span>{f}
+            </li>
+          ))}
+        </ul>
+      ),
+      b: (
+        <ul className="space-y-1.5">
+          {toolB.features?.ar?.slice(0, 3).map((f: string, i: number) => (
+            <li key={i} className="font-cairo text-muted text-sm flex items-start gap-2">
+              <span className="text-success flex-shrink-0 mt-0.5">•</span>{f}
+            </li>
+          ))}
+        </ul>
+      ),
+    },
+  ]
+
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-2">
-        {toolA.name_ar} مقابل {toolB.name_ar}
+      {/* Header */}
+      <div
+        className="mb-8"
+        style={{ fontFamily: "'Geist Mono', monospace", fontSize: '11px', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 12 }}
+      >
+        مقارنة مفصّلة
+      </div>
+      <h1
+        className="font-cairo font-bold text-text mb-2"
+        style={{ fontSize: '32px' }}
+      >
+        {toolA.name_ar}
+        <span className="text-muted font-light mx-3" style={{ fontSize: '24px' }}>vs</span>
+        {toolB.name_ar}
       </h1>
-      <p className="text-gray-500 mb-8">مقارنة تفصيلية — اختر الأنسب لاحتياجاتك</p>
+      <p className="font-cairo text-muted mb-8" style={{ fontSize: '15px' }}>
+        مقارنة تفصيلية — اختر الأنسب لاحتياجاتك
+      </p>
 
-      {/* Use case filter — links to best/[useCase] pages */}
+      {/* Use case pills */}
       <section className="mb-8">
-        <p className="text-sm text-gray-600 mb-3">تصفح حسب الاستخدام:</p>
+        <p className="font-cairo text-muted text-sm mb-3">تصفح حسب الاستخدام:</p>
         <div className="flex flex-wrap gap-2">
           {USE_CASES.map((uc) => (
             <a
               key={uc}
               href={`/best/${encodeURIComponent(uc)}`}
-              className="text-sm px-3 py-1 rounded-full border border-gray-300 hover:bg-blue-50 hover:border-blue-300"
+              className="font-cairo text-muted text-sm no-underline hover:text-text transition-colors duration-150"
+              style={{
+                padding: '5px 14px',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'var(--surface)',
+                border: '1px solid var(--border)',
+              }}
             >
               {uc}
             </a>
@@ -80,85 +161,77 @@ export default async function ComparePage({ params }: Props) {
         </div>
       </section>
 
-      {/* Comparison table */}
-      <div className="overflow-x-auto">
+      {/* Compare table */}
+      <div
+        className="overflow-x-auto rounded-md mb-8"
+        style={{ border: '1px solid var(--border)' }}
+      >
         <table className="w-full border-collapse">
           <thead>
-            <tr className="bg-gray-50">
-              <th className="text-right p-4 border border-gray-200 w-1/3">المعيار</th>
-              <th className="text-center p-4 border border-gray-200">{toolB.name_ar}</th>
-              <th className="text-center p-4 border border-gray-200">{toolA.name_ar}</th>
+            <tr style={{ backgroundColor: 'var(--surface-2)', borderBottom: '1px solid var(--border)' }}>
+              <th
+                className="font-cairo text-muted font-medium text-sm text-right p-4"
+                style={{ width: '33%' }}
+              >
+                المعيار
+              </th>
+              <th className="font-cairo text-text font-semibold text-center p-4">
+                {toolA.name_ar}
+              </th>
+              <th className="font-cairo text-text font-semibold text-center p-4">
+                {toolB.name_ar}
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="p-4 border border-gray-200 font-medium">السعر</td>
-              <td className="p-4 border border-gray-200 text-center">
-                {toolB.is_free_tier ? (
-                  <span className="text-green-600 font-semibold">مجاني</span>
-                ) : toolB.price_from ? (
-                  <span>${toolB.price_from}/شهر<br/>
-                    <span className="text-sm text-gray-500">
-                      ({convertCurrency(toolB.price_from, sarRate)} ريال)
-                    </span>
-                  </span>
-                ) : '—'}
-              </td>
-              <td className="p-4 border border-gray-200 text-center">
-                {toolA.is_free_tier ? (
-                  <span className="text-green-600 font-semibold">مجاني</span>
-                ) : toolA.price_from ? (
-                  <span>${toolA.price_from}/شهر<br/>
-                    <span className="text-sm text-gray-500">
-                      ({convertCurrency(toolA.price_from, sarRate)} ريال)
-                    </span>
-                  </span>
-                ) : '—'}
-              </td>
-            </tr>
-            <tr className="bg-gray-50">
-              <td className="p-4 border border-gray-200 font-medium">الفئة</td>
-              <td className="p-4 border border-gray-200 text-center">{CATEGORY_AR[toolB.category] ?? toolB.category}</td>
-              <td className="p-4 border border-gray-200 text-center">{CATEGORY_AR[toolA.category] ?? toolA.category}</td>
-            </tr>
-            <tr>
-              <td className="p-4 border border-gray-200 font-medium">طبقة مجانية</td>
-              <td className="p-4 border border-gray-200 text-center">
-                {toolB.is_free_tier ? '✅' : '❌'}
-              </td>
-              <td className="p-4 border border-gray-200 text-center">
-                {toolA.is_free_tier ? '✅' : '❌'}
-              </td>
-            </tr>
-            <tr className="bg-gray-50">
-              <td className="p-4 border border-gray-200 font-medium">أبرز المميزات</td>
-              <td className="p-4 border border-gray-200">
-                <ul className="space-y-1">
-                  {toolB.features?.ar?.slice(0, 3).map((f, i) => (
-                    <li key={i} className="text-sm">• {f}</li>
-                  ))}
-                </ul>
-              </td>
-              <td className="p-4 border border-gray-200">
-                <ul className="space-y-1">
-                  {toolA.features?.ar?.slice(0, 3).map((f, i) => (
-                    <li key={i} className="text-sm">• {f}</li>
-                  ))}
-                </ul>
-              </td>
-            </tr>
+            {rows.map((row, i) => (
+              <tr
+                key={row.label}
+                style={{
+                  backgroundColor: i % 2 === 0 ? 'var(--surface)' : 'transparent',
+                  borderBottom: i < rows.length - 1 ? '1px solid var(--border)' : undefined,
+                }}
+              >
+                <td className="font-cairo text-text font-medium text-sm p-4">{row.label}</td>
+                <td className="p-4 text-center">{row.a}</td>
+                <td className="p-4 text-center">{row.b}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
 
-      <div className="flex gap-4 mt-8">
-        <a href={toolB.official_url} target="_blank" rel="noopener noreferrer nofollow"
-          className="flex-1 text-center bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
-          جرّب {toolB.name_ar}
-        </a>
-        <a href={toolA.official_url} target="_blank" rel="noopener noreferrer nofollow"
-          className="flex-1 text-center bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
+      {/* CTA buttons */}
+      <div className="flex flex-wrap gap-3">
+        <a
+          href={toolA.affiliate_url ?? toolA.official_url}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          className="flex-1 font-cairo font-bold text-sm no-underline text-center hover:brightness-110 transition-all duration-150"
+          style={{
+            backgroundColor: 'var(--accent)',
+            color: '#0F1117',
+            padding: '13px 24px',
+            borderRadius: 'var(--radius-sm)',
+            minWidth: 160,
+          }}
+        >
           جرّب {toolA.name_ar}
+        </a>
+        <a
+          href={toolB.affiliate_url ?? toolB.official_url}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          className="flex-1 font-cairo font-bold text-sm no-underline text-center text-text hover:border-accent hover:text-accent transition-colors duration-150"
+          style={{
+            backgroundColor: 'var(--surface)',
+            border: '1px solid var(--border)',
+            padding: '13px 24px',
+            borderRadius: 'var(--radius-sm)',
+            minWidth: 160,
+          }}
+        >
+          جرّب {toolB.name_ar}
         </a>
       </div>
     </div>
