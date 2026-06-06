@@ -52,10 +52,12 @@ function altCountLabel(n: number): string {
 }
 
 function buildSummary(alts: Tool[]): string {
-  const freeCount = alts.filter((t) => t.is_free_tier).length
-  const paidCount = alts.length - freeCount
+  const fullyFree = alts.filter((t) => t.is_free_tier && !t.price_from).length
+  const freeTier = alts.filter((t) => t.is_free_tier && t.price_from).length
+  const paidCount = alts.filter((t) => !t.is_free_tier).length
   const parts: string[] = []
-  if (freeCount > 0) parts.push(`${freeCount} ${freeCount === 1 ? 'فيه خطة مجانية' : 'فيها خطة مجانية'}`)
+  if (fullyFree > 0) parts.push(`${fullyFree} مجاني بالكامل`)
+  if (freeTier > 0) parts.push(`${freeTier} فيه خطة مجانية`)
   if (paidCount > 0) parts.push(`${paidCount} ${paidCount === 1 ? 'مدفوع' : 'مدفوعة'}`)
   return parts.join(' · ')
 }
@@ -90,7 +92,7 @@ export default async function AlternativesPage({ params }: Props) {
                   <h2 className="text-lg font-semibold">{tool.name_ar}</h2>
                   {tool.is_free_tier && (
                     <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                      فيه خطة مجانية
+                      {tool.price_from ? 'فيه خطة مجانية' : 'مجاني بالكامل'}
                     </span>
                   )}
                 </div>
