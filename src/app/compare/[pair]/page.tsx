@@ -149,13 +149,13 @@ export default async function ComparePage({ params }: Props) {
       </div>
 
       <div className="flex gap-4 mt-8">
-        <a href={toolA.official_url} target="_blank" rel="noopener noreferrer nofollow"
-          className="flex-1 text-center bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
-          جرّب {toolA.name_ar}
-        </a>
         <a href={toolB.official_url} target="_blank" rel="noopener noreferrer nofollow"
           className="flex-1 text-center bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
           جرّب {toolB.name_ar}
+        </a>
+        <a href={toolA.official_url} target="_blank" rel="noopener noreferrer nofollow"
+          className="flex-1 text-center bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
+          جرّب {toolA.name_ar}
         </a>
       </div>
     </div>
