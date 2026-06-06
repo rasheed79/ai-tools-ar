@@ -34,6 +34,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const USE_CASES = ['كتابة', 'تسويق', 'تعليم', 'برمجة', 'تصميم', 'فيديو', 'صوت']
 
+const CATEGORY_AR: Record<string, string> = {
+  writing: 'كتابة',
+  image: 'صور',
+  code: 'برمجة',
+  video: 'فيديو',
+  audio: 'صوت',
+}
+
 export default async function ComparePage({ params }: Props) {
   const { pair } = await params
   const parts = pair.split('-vs-')
@@ -75,24 +83,13 @@ export default async function ComparePage({ params }: Props) {
           <thead>
             <tr className="bg-gray-50">
               <th className="text-right p-4 border border-gray-200 w-1/3">المعيار</th>
-              <th className="text-center p-4 border border-gray-200">{toolA.name_ar}</th>
               <th className="text-center p-4 border border-gray-200">{toolB.name_ar}</th>
+              <th className="text-center p-4 border border-gray-200">{toolA.name_ar}</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td className="p-4 border border-gray-200 font-medium">السعر</td>
-              <td className="p-4 border border-gray-200 text-center">
-                {toolA.is_free_tier ? (
-                  <span className="text-green-600 font-semibold">مجاني</span>
-                ) : toolA.price_from ? (
-                  <span>${toolA.price_from}/شهر<br/>
-                    <span className="text-sm text-gray-500">
-                      ({convertCurrency(toolA.price_from, sarRate)} ريال)
-                    </span>
-                  </span>
-                ) : '—'}
-              </td>
               <td className="p-4 border border-gray-200 text-center">
                 {toolB.is_free_tier ? (
                   <span className="text-green-600 font-semibold">مجاني</span>
@@ -104,33 +101,44 @@ export default async function ComparePage({ params }: Props) {
                   </span>
                 ) : '—'}
               </td>
+              <td className="p-4 border border-gray-200 text-center">
+                {toolA.is_free_tier ? (
+                  <span className="text-green-600 font-semibold">مجاني</span>
+                ) : toolA.price_from ? (
+                  <span>${toolA.price_from}/شهر<br/>
+                    <span className="text-sm text-gray-500">
+                      ({convertCurrency(toolA.price_from, sarRate)} ريال)
+                    </span>
+                  </span>
+                ) : '—'}
+              </td>
             </tr>
             <tr className="bg-gray-50">
               <td className="p-4 border border-gray-200 font-medium">الفئة</td>
-              <td className="p-4 border border-gray-200 text-center">{toolA.category}</td>
-              <td className="p-4 border border-gray-200 text-center">{toolB.category}</td>
+              <td className="p-4 border border-gray-200 text-center">{CATEGORY_AR[toolB.category] ?? toolB.category}</td>
+              <td className="p-4 border border-gray-200 text-center">{CATEGORY_AR[toolA.category] ?? toolA.category}</td>
             </tr>
             <tr>
               <td className="p-4 border border-gray-200 font-medium">طبقة مجانية</td>
               <td className="p-4 border border-gray-200 text-center">
-                {toolA.is_free_tier ? '✅' : '❌'}
+                {toolB.is_free_tier ? '✅' : '❌'}
               </td>
               <td className="p-4 border border-gray-200 text-center">
-                {toolB.is_free_tier ? '✅' : '❌'}
+                {toolA.is_free_tier ? '✅' : '❌'}
               </td>
             </tr>
             <tr className="bg-gray-50">
               <td className="p-4 border border-gray-200 font-medium">أبرز المميزات</td>
               <td className="p-4 border border-gray-200">
                 <ul className="space-y-1">
-                  {toolA.features?.ar?.slice(0, 3).map((f, i) => (
+                  {toolB.features?.ar?.slice(0, 3).map((f, i) => (
                     <li key={i} className="text-sm">• {f}</li>
                   ))}
                 </ul>
               </td>
               <td className="p-4 border border-gray-200">
                 <ul className="space-y-1">
-                  {toolB.features?.ar?.slice(0, 3).map((f, i) => (
+                  {toolA.features?.ar?.slice(0, 3).map((f, i) => (
                     <li key={i} className="text-sm">• {f}</li>
                   ))}
                 </ul>
