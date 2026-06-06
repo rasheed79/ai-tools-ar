@@ -268,7 +268,7 @@ async function main() {
   const { data: tools, error } = await supabase
     .from('tools')
     .select('*')
-    .order('name')
+    .order('name') as { data: Tool[] | null; error: unknown }
 
   if (error) {
     console.error('خطأ في الاتصال بـ Supabase:', error.message)
