@@ -24,7 +24,8 @@ async function getAllTools(): Promise<Tool[]> {
   return data as Tool[]
 }
 
-export default async function ToolsPage() {
+export default async function ToolsPage({ searchParams }: { searchParams: Promise<{ compare?: string }> }) {
+  const { compare } = await searchParams
   const tools = await getAllTools()
 
   const byCategory = tools.reduce<Record<string, Tool[]>>((acc, t) => {
@@ -37,6 +38,12 @@ export default async function ToolsPage() {
     <div>
       <h1 className="text-3xl font-bold mb-8">جميع أدوات الذكاء الاصطناعي</h1>
 
+      {compare && (
+        <div className="mb-6 p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-700">
+          اختر أداة للمقارنة مع <strong>{compare}</strong>
+        </div>
+      )}
+
       {Object.entries(byCategory).map(([category, catTools]) => (
         <section key={category} className="mb-12">
           <h2 className="text-xl font-semibold mb-4 border-b pb-2">
@@ -46,7 +53,9 @@ export default async function ToolsPage() {
             {catTools.map((tool) => (
               <Link
                 key={tool.slug}
-                href={`/tools/${tool.slug}`}
+                href={compare && tool.slug !== compare
+                  ? `/compare/${compare}-vs-${tool.slug}`
+                  : `/tools/${tool.slug}`}
                 className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
               >
                 <div className="flex items-start justify-between">
