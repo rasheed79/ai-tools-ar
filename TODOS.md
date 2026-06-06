@@ -6,6 +6,61 @@
 
 ---
 
+## P0 — الخطوات الفورية (دومين + إطلاق)
+
+### D1: اشتري daleel-adawat.com
+**ما:** شراء الدومين على Cloudflare Registrar
+**التكلفة:** $10.46/سنة ثابت (at-cost, بدون markup)
+**الخطوات:** domains.cloudflare.com → ابحث عن daleel-adawat.com → Purchase
+
+### D2: اربط الدومين بـ Cloudflare Pages
+**ما:** ربط daleel-adawat.com بالمشروع الحالي
+**الخطوات:** Pages dashboard → Custom Domains → أضف daleel-adawat.com → SSL تلقائي
+**ملاحظة:** أضف www كـ CNAME أيضاً
+
+### D3: حدّث NEXT_PUBLIC_SITE_URL
+**ما:** تغيير env var للدومين الجديد
+**الملف:** `.env.local` → `NEXT_PUBLIC_SITE_URL=https://daleel-adawat.com`
+**بعدها:** redeploy واحد
+
+### D4: أضف الموقع لـ Google Search Console
+**ما:** تسجيل الدومين الجديد + إرسال sitemap
+**الخطوات:** search.google.com/search-console → Add property → Domain → أدخل daleel-adawat.com → أرسل sitemap.xml
+**أهمية:** كل يوم تأخير = trust يضيع مع Google
+
+### D5: افتح Telegram channel + Twitter/X
+**ما:** قنوات نشر باسم الموقع
+**Telegram:** @daleelAdawat أو اسم مشابه
+**Twitter:** @daleel_adawat أو مشابه
+**المحتوى:** "أداة AI اليوم" يومياً
+
+---
+
+## P1.5 — محتوى + AdSense
+
+### C1: اكتب 20 صفحة أداة (بمساعدة Claude + مراجعة بشرية)
+**ما:** وصول عدد صفحات كافٍ للتقدم لـ AdSense
+**الإجراء:** Claude يكتب الصفحة → أنت تراجع السعر والميزات → تنشر
+**المعدل المستهدف:** صفحة/يوم أو صفحتين
+**يعتمد على:** D1-D3 مكتملة
+
+### C2: تقدّم لـ Google AdSense
+**متى:** بعد 20+ صفحة أصيلة + دومين مخصص
+**الرابط:** google.com/adsense
+**يعتمد على:** C1
+
+### C3: بعد 100 صفحة — ابنِ أيجنت أتمتة المحتوى
+**ما:** Claude API + GitHub Actions + PR workflow للنشر شبه-تلقائي
+**الإجراء:** `/plan` لبناء spec كاملة عند الوصول لـ 100 صفحة
+**يعتمد على:** C1 + AdSense approval
+
+### C4: بعد AdSense approval — أتمتة نشر Twitter/Telegram
+**ما:** نشر تلقائي عند كل صفحة جديدة على Twitter + Telegram
+**التقنية:** Twitter API v2 + Telegram Bot API (مجانيان)
+**يعتمد على:** C2 + C3
+
+---
+
 ## P2 — يجب أن يصل نفس البرنامج
 
 ### T2: UGC تقييمات مستخدمين عرب
