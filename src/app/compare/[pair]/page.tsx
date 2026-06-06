@@ -26,13 +26,16 @@ async function getTwoTools(slugA: string, slugB: string): Promise<[Tool, Tool] |
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pair } = await params
   const [slugA, slugB] = pair.split('-vs-')
+  const tools = await getTwoTools(slugA, slugB)
+  const nameA = tools?.[0]?.name_ar ?? slugA
+  const nameB = tools?.[1]?.name_ar ?? slugB
   return {
-    title: `${slugA} مقابل ${slugB} — مقارنة`,
-    description: `مقارنة تفصيلية بين ${slugA} و${slugB} — الأسعار، المميزات، والأفضل لاستخدامك`,
+    title: `${nameA} مقابل ${nameB} — مقارنة`,
+    description: `مقارنة تفصيلية بين ${nameA} و${nameB} — الأسعار، المميزات، والأفضل لاستخدامك`,
   }
 }
 
-const USE_CASES = ['كتابة', 'تسويق', 'تعليم', 'برمجة', 'تصميم', 'فيديو', 'صوت']
+const USE_CASES = ['كتابة', 'تسويق', 'تعليم', 'برمجة', 'تصميم', 'فيديو', 'صوت', 'بحث', 'عمل', 'إبداع']
 
 const CATEGORY_AR: Record<string, string> = {
   writing: 'كتابة',
