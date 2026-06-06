@@ -51,6 +51,15 @@ function altCountLabel(n: number): string {
   return `${n} بديلاً`
 }
 
+function buildSummary(alts: Tool[]): string {
+  const freeCount = alts.filter((t) => t.is_free_tier).length
+  const paidCount = alts.length - freeCount
+  const parts: string[] = []
+  if (freeCount > 0) parts.push(`${freeCount} ${freeCount === 1 ? 'مجاني' : 'مجانية'}`)
+  if (paidCount > 0) parts.push(`${paidCount} ${paidCount === 1 ? 'مدفوع' : 'مدفوعة'}`)
+  return parts.join(' · ')
+}
+
 export default async function AlternativesPage({ params }: Props) {
   const { slug } = await params
   const result = await getAlternatives(slug)
@@ -63,7 +72,7 @@ export default async function AlternativesPage({ params }: Props) {
         بدائل {original.name_ar}
       </h1>
       <p className="text-gray-500 mb-8">
-        {altCountLabel(alts.length)} — مرتبة من الأفضل
+        {altCountLabel(alts.length)} — {buildSummary(alts)} — مرتبة من الأفضل
       </p>
 
       {alts.length === 0 ? (
