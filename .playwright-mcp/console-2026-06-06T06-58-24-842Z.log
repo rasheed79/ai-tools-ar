@@ -1,0 +1,5 @@
+[  311673ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://ai-tools-ar.abdulrasheed-jamali.workers.dev/best/writing:0
+[  314723ms] [ERROR] Failed to load resource: the server responded with a status of 500 () @ https://ai-tools-ar.abdulrasheed-jamali.workers.dev/tools/notion-ai?_rsc=3y854:0
+[  314724ms] [ERROR] Failed to load resource: the server responded with a status of 500 () @ https://ai-tools-ar.abdulrasheed-jamali.workers.dev/tools/gemini?_rsc=3y854:0
+[  314725ms] [ERROR] Failed to load resource: the server responded with a status of 500 () @ https://ai-tools-ar.abdulrasheed-jamali.workers.dev/tools/claude?_rsc=3y854:0
+[  314738ms] [ERROR] Failed to load resource: the server responded with a status of 500 () @ https://ai-tools-ar.abdulrasheed-jamali.workers.dev/tools/chatgpt?_rsc=3y854:0
