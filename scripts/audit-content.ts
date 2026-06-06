@@ -271,7 +271,7 @@ async function main() {
     .order('name') as { data: Tool[] | null; error: unknown }
 
   if (error) {
-    console.error('خطأ في الاتصال بـ Supabase:', error.message)
+    console.error('خطأ في الاتصال بـ Supabase:', (error as Error).message)
     process.exit(1)
   }
 
