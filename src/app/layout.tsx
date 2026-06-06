@@ -39,9 +39,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         }}>
           {/* nav — right side in RTL */}
           <nav style={{ display: 'flex', gap: 28, listStyle: 'none' }}>
-            <a href="/best/%D9%83%D8%AA%D8%A7%D8%A8%D8%A9" style={{ fontFamily: "'Cairo', sans-serif", fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none' }}>أفضل الأدوات</a>
-            <a href="/tools" style={{ fontFamily: "'Cairo', sans-serif", fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none' }}>مقارنة</a>
-            <a href="/tools" style={{ fontFamily: "'Cairo', sans-serif", fontSize: 14, color: 'var(--accent)', textDecoration: 'none' }}>جميع الأدوات</a>
+            <a href="/best/%D9%83%D8%AA%D8%A7%D8%A8%D8%A9" style={{ fontFamily: "'Cairo', sans-serif", fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none', cursor: 'pointer', transition: 'color 0.15s' }}>أفضل الأدوات</a>
+            <a href="/tools" style={{ fontFamily: "'Cairo', sans-serif", fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none', cursor: 'pointer', transition: 'color 0.15s' }}>مقارنة</a>
+            <a href="/tools" style={{ fontFamily: "'Cairo', sans-serif", fontSize: 14, color: 'var(--accent)', textDecoration: 'none', cursor: 'pointer' }}>جميع الأدوات</a>
           </nav>
 
           {/* logo + search — left side in RTL */}
@@ -54,8 +54,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               borderRadius: 'var(--radius-sm)',
               padding: '6px 14px',
               width: 220,
+              cursor: 'text',
             }}>
-              <span style={{ color: 'var(--text-muted)', fontSize: 14 }}>⌕</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-muted)', flexShrink: 0 }}>
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
               <span style={{ fontFamily: "'Cairo', sans-serif", fontSize: 13, color: 'var(--text-muted)' }}>ابحث عن أداة...</span>
             </div>
             {/* logo */}
@@ -63,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               display: 'flex', alignItems: 'center', gap: 8,
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontWeight: 700, fontSize: 18,
-              color: 'var(--text)', textDecoration: 'none',
+              color: 'var(--text)', textDecoration: 'none', cursor: 'pointer',
             }}>
               <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: 'var(--accent)', display: 'inline-block' }} />
               أدوات AI

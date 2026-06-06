@@ -47,4 +47,13 @@
     border-color: var(--accent) !important;
     transform: translateY(-1px);
   }
+  @media (prefers-reduced-motion: reduce) {
+    .card-hover:hover {
+      transform: none;
+    }
+    * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
 }

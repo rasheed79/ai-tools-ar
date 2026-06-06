@@ -4,20 +4,54 @@ import Link from 'next/link'
 
 export const revalidate = 3600
 
-const CATEGORY_ICONS: Record<string, string> = {
-  writing: '✍',
-  image:   '🖼',
-  code:    '💻',
-  video:   '🎬',
-  audio:   '🎙',
-}
-
 const CATEGORY_LABELS: Record<string, string> = {
   writing: 'كتابة',
   image:   'صور',
   code:    'كود',
   video:   'فيديو',
   audio:   'صوت',
+}
+
+function CategoryIcon({ category, size = 18 }: { category: string; size?: number }) {
+  const s = size
+  switch (category) {
+    case 'writing':
+      return (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+      )
+    case 'image':
+      return (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+        </svg>
+      )
+    case 'code':
+      return (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+      )
+    case 'video':
+      return (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
+        </svg>
+      )
+    case 'audio':
+      return (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+      )
+    default:
+      return (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+        </svg>
+      )
+  }
 }
 
 async function getTools(): Promise<Tool[]> {
@@ -41,17 +75,14 @@ export default async function HomePage() {
 
   return (
     <div>
-      {/* ── Hero ── exact match to preview */}
+      {/* ── Hero ── */}
       <section style={{
-        padding: '72px 0 56px',
+        padding: '72px 32px 56px',
         borderBottom: '1px solid var(--border)',
         position: 'relative',
         overflow: 'hidden',
         margin: '0 -24px',
-        paddingLeft: 32,
-        paddingRight: 32,
       }}>
-        {/* grid background */}
         <div style={{
           position: 'absolute',
           inset: 0,
@@ -63,7 +94,6 @@ export default async function HomePage() {
         }} />
 
         <div style={{ position: 'relative', zIndex: 1 }}>
-          {/* eyebrow */}
           <div style={{
             fontFamily: "'Geist Mono', monospace",
             fontSize: 12,
@@ -79,7 +109,6 @@ export default async function HomePage() {
             المرجع العربي لأدوات الذكاء الاصطناعي
           </div>
 
-          {/* title */}
           <div style={{
             fontFamily: "'Cairo', sans-serif",
             fontSize: 52,
@@ -93,7 +122,6 @@ export default async function HomePage() {
             <br />بالعربية
           </div>
 
-          {/* subtitle */}
           <div style={{
             fontFamily: "'Cairo', sans-serif",
             fontSize: 17,
@@ -106,7 +134,6 @@ export default async function HomePage() {
             <br />كل ما تحتاجه في مكان واحد
           </div>
 
-          {/* CTA buttons — no newsletter in hero, matches preview */}
           <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
             <Link href="/tools" style={{
               fontFamily: "'Cairo', sans-serif",
@@ -118,6 +145,7 @@ export default async function HomePage() {
               backgroundColor: 'var(--accent)',
               color: '#0F1117',
               transition: 'filter 0.15s',
+              cursor: 'pointer',
             }}>
               اكتشف الأدوات ←
             </Link>
@@ -131,12 +159,12 @@ export default async function HomePage() {
               backgroundColor: 'var(--surface-2)',
               color: 'var(--text)',
               border: '1px solid var(--border)',
+              cursor: 'pointer',
             }}>
               مقارنة أداتين
             </Link>
           </div>
 
-          {/* stats */}
           <div style={{
             display: 'flex',
             gap: 40,
@@ -181,11 +209,13 @@ export default async function HomePage() {
           backgroundColor: 'rgba(232,160,64,0.12)',
           border: '1px solid var(--accent)',
           color: 'var(--accent)',
+          cursor: 'pointer',
         }}>الكل</Link>
         {categories.map((cat) => (
           <Link key={cat} href={`/tools?category=${cat}`} style={{
             display: 'inline-flex',
             alignItems: 'center',
+            gap: 6,
             padding: '6px 16px',
             borderRadius: 'var(--radius-sm)',
             fontFamily: "'Cairo', sans-serif",
@@ -195,8 +225,12 @@ export default async function HomePage() {
             color: 'var(--text-muted)',
             backgroundColor: 'var(--surface)',
             border: '1px solid var(--border)',
+            cursor: 'pointer',
           }}>
-            {CATEGORY_ICONS[cat] ?? ''} {CATEGORY_LABELS[cat] ?? cat}
+            <span style={{ opacity: 0.7, display: 'flex' }}>
+              <CategoryIcon category={cat} size={13} />
+            </span>
+            {CATEGORY_LABELS[cat] ?? cat}
           </Link>
         ))}
       </div>
@@ -234,6 +268,7 @@ export default async function HomePage() {
             fontSize: 14,
             color: 'var(--accent)',
             textDecoration: 'none',
+            cursor: 'pointer',
           }}>
             عرض جميع الأدوات ←
           </Link>
@@ -244,8 +279,6 @@ export default async function HomePage() {
 }
 
 function ToolCard({ tool }: { tool: Tool }) {
-  const icon = CATEGORY_ICONS[tool.category] ?? '🤖'
-
   return (
     <a
       href={`/tools/${tool.slug}`}
@@ -257,10 +290,10 @@ function ToolCard({ tool }: { tool: Tool }) {
         border: '1px solid var(--border)',
         borderRadius: 'var(--radius-md)',
         padding: 20,
-        transition: 'border-color 0.15s, transform 0.15s',
+        transition: 'border-color 0.2s, transform 0.2s',
+        cursor: 'pointer',
       }}
     >
-      {/* top: name+EN left, icon right — RTL so icon is visual-left */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 12 }}>
         <div>
           <div style={{ fontFamily: "'Cairo', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
@@ -271,18 +304,18 @@ function ToolCard({ tool }: { tool: Tool }) {
           </div>
         </div>
         <div style={{
-          width: 40, height: 40, fontSize: 20,
+          width: 40, height: 40,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           backgroundColor: 'var(--surface-2)',
           border: '1px solid var(--border)',
           borderRadius: 'var(--radius-sm)',
           flexShrink: 0,
+          color: 'var(--text-muted)',
         }}>
-          {icon}
+          <CategoryIcon category={tool.category} size={18} />
         </div>
       </div>
 
-      {/* badges row */}
       <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
         <span style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -310,7 +343,6 @@ function ToolCard({ tool }: { tool: Tool }) {
         </span>
       </div>
 
-      {/* description */}
       <div style={{
         fontFamily: "'Cairo', sans-serif",
         fontSize: 13,
@@ -324,7 +356,6 @@ function ToolCard({ tool }: { tool: Tool }) {
         {tool.description_ar}
       </div>
 
-      {/* footer */}
       <div style={{
         marginTop: 16, paddingTop: 14,
         borderTop: '1px solid var(--border)',
