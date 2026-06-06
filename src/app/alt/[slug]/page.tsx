@@ -44,6 +44,13 @@ async function getAlternatives(slug: string): Promise<{ original: Tool; alts: To
   return { original, alts: (altsData as Tool[]) ?? [] }
 }
 
+function altCountLabel(n: number): string {
+  if (n === 1) return 'بديل واحد'
+  if (n === 2) return 'بديلان'
+  if (n >= 3 && n <= 10) return `${n} بدائل`
+  return `${n} بديلاً`
+}
+
 export default async function AlternativesPage({ params }: Props) {
   const { slug } = await params
   const result = await getAlternatives(slug)
@@ -56,7 +63,7 @@ export default async function AlternativesPage({ params }: Props) {
         بدائل {original.name_ar}
       </h1>
       <p className="text-gray-500 mb-8">
-        {alts.length} بديل — مرتبة من الأفضل
+        {altCountLabel(alts.length)} — مرتبة من الأفضل
       </p>
 
       {alts.length === 0 ? (
@@ -81,7 +88,9 @@ export default async function AlternativesPage({ params }: Props) {
                 <p className="text-gray-600 text-sm">{tool.description_ar}</p>
               </div>
               <div className="text-left shrink-0">
-                {tool.price_from ? (
+                {tool.is_free_tier ? (
+                  <span className="text-green-600 font-medium">مجاني</span>
+                ) : tool.price_from ? (
                   <span className="text-blue-600 font-medium">${tool.price_from}/شهر</span>
                 ) : (
                   <span className="text-green-600 font-medium">مجاني</span>
