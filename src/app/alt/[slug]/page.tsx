@@ -69,41 +69,126 @@ export default async function AlternativesPage({ params }: Props) {
   const { original, alts } = result
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-2">
-        بدائل {original.name_ar}
+    <div style={{ padding: '40px 0' }}>
+      <div style={{
+        fontFamily: "'Geist Mono', monospace",
+        fontSize: 11,
+        color: 'var(--accent)',
+        letterSpacing: '0.1em',
+        textTransform: 'uppercase',
+        marginBottom: 16,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+      }}>
+        <span style={{ display: 'inline-block', width: 20, height: 1, background: 'var(--accent)' }} />
+        بدائل مجانية
+      </div>
+
+      <h1 style={{
+        fontFamily: "'Cairo', sans-serif",
+        fontSize: 36,
+        fontWeight: 700,
+        color: 'var(--text)',
+        marginBottom: 8,
+        lineHeight: 1.2,
+      }}>
+        بدائل <em style={{ fontStyle: 'normal', color: 'var(--accent)' }}>{original.name_ar}</em>
       </h1>
-      <p className="text-gray-500 mb-8">
-        {altCountLabel(alts.length)} — {buildSummary(alts)} — مرتبة من الأفضل
+
+      <p style={{
+        fontFamily: "'Geist Mono', monospace",
+        fontSize: 13,
+        color: 'var(--text-muted)',
+        marginBottom: 40,
+      }}>
+        {altCountLabel(alts.length)} — {buildSummary(alts)}
       </p>
 
       {alts.length === 0 ? (
-        <p className="text-gray-500">لا توجد بدائل متاحة حالياً.</p>
+        <div style={{
+          textAlign: 'center', padding: '64px 32px',
+          border: '1px dashed var(--border)', borderRadius: 'var(--radius-md)',
+          fontFamily: "'Cairo', sans-serif", color: 'var(--text-muted)',
+        }}>
+          لا توجد بدائل متاحة حالياً
+        </div>
       ) : (
-        <div className="space-y-4">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {alts.map((tool) => (
             <Link
               key={tool.slug}
               href={`/tools/${tool.slug}`}
-              className="flex items-start gap-4 border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow"
+              className="card-hover"
+              style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 20,
+                backgroundColor: 'var(--surface)',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-md)',
+                padding: '20px 24px',
+                textDecoration: 'none',
+                transition: 'border-color 0.2s',
+                cursor: 'pointer',
+              }}
             >
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <h2 className="text-lg font-semibold">{tool.name_ar}</h2>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, flexWrap: 'wrap' }}>
+                  <span style={{
+                    fontFamily: "'Cairo', sans-serif",
+                    fontSize: 17,
+                    fontWeight: 700,
+                    color: 'var(--text)',
+                  }}>
+                    {tool.name_ar}
+                  </span>
+                  <span style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: 12,
+                    color: 'var(--text-muted)',
+                  }}>
+                    {tool.name}
+                  </span>
                   {tool.is_free_tier && (
-                    <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                    <span style={{
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontSize: 11,
+                      fontWeight: 500,
+                      padding: '2px 10px',
+                      borderRadius: 'var(--radius-sm)',
+                      backgroundColor: 'rgba(76,175,125,0.12)',
+                      color: 'var(--success)',
+                      border: '1px solid rgba(76,175,125,0.3)',
+                    }}>
                       {tool.price_from ? 'فيه خطة مجانية' : 'مجاني بالكامل'}
                     </span>
                   )}
                 </div>
-                <p className="text-gray-600 text-sm">{tool.description_ar}</p>
+                <p style={{
+                  fontFamily: "'Cairo', sans-serif",
+                  fontSize: 14,
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.65,
+                  margin: 0,
+                }}>
+                  {tool.description_ar}
+                </p>
               </div>
-              <div className="text-left shrink-0">
-                {tool.price_from ? (
-                  <span className="text-blue-600 font-medium">${tool.price_from}/شهر</span>
-                ) : (
-                  <span className="text-green-600 font-medium">مجاني</span>
-                )}
+              <div style={{
+                fontFamily: "'Geist Mono', monospace",
+                fontSize: 14,
+                fontWeight: 500,
+                flexShrink: 0,
+                fontVariantNumeric: 'tabular-nums',
+                paddingTop: 2,
+                color: tool.is_free_tier ? 'var(--success)' : 'var(--accent)',
+              }}>
+                {tool.is_free_tier && !tool.price_from
+                  ? 'مجاني'
+                  : tool.price_from
+                  ? `$${tool.price_from}/شهر`
+                  : '—'}
               </div>
             </Link>
           ))}
