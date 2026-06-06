@@ -58,7 +58,7 @@ export default async function ToolsPage({ searchParams }: { searchParams: Promis
                 href={compare && tool.slug !== compare
                   ? `/compare/${compare}-vs-${tool.slug}`
                   : `/tools/${tool.slug}`}
-                className="block no-underline bg-surface border border-border rounded-md p-4 hover:border-accent transition-colors duration-150"
+                className="block no-underline bg-surface border border-border rounded-md p-4 hover:border-accent transition-colors duration-150 cursor-pointer"
               >
                 <div className="flex items-start justify-between mb-2">
                   <span className="font-cairo font-semibold text-text">{tool.name_ar}</span>

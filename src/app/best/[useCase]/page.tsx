@@ -23,9 +23,14 @@ async function getToolsByUseCase(decoded: string): Promise<Tool[]> {
     .select('*')
     .contains('use_cases', [decoded])
     .order('is_free_tier', { ascending: false })
-
   if (error || !data) return []
   return data as Tool[]
+}
+
+const PRICING_STYLE = (tool: Tool): React.CSSProperties => {
+  if (tool.is_free_tier) return { color: 'var(--success)' }
+  if (tool.pricing?.toLowerCase() === 'freemium') return { color: 'var(--text-muted)' }
+  return { color: 'var(--accent)' }
 }
 
 export default async function BestToolsPage({ params }: Props) {
@@ -36,36 +41,136 @@ export default async function BestToolsPage({ params }: Props) {
   if (!tools.length) notFound()
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-2">أفضل أدوات AI لـ{decoded}</h1>
-      <p className="text-gray-500 mb-8">
-        {tools.length} {tools.length === 1 ? 'أداة' : tools.length <= 10 ? 'أدوات' : 'أداة'} — مرتبة من الأفضل للاستخدام
+    <div style={{ padding: '40px 0' }}>
+      {/* eyebrow */}
+      <div style={{
+        fontFamily: "'Geist Mono', monospace",
+        fontSize: 11,
+        color: 'var(--accent)',
+        letterSpacing: '0.1em',
+        textTransform: 'uppercase',
+        marginBottom: 16,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+      }}>
+        <span style={{ display: 'inline-block', width: 20, height: 1, background: 'var(--accent)' }} />
+        قائمة مختارة
+      </div>
+
+      <h1 style={{
+        fontFamily: "'Cairo', sans-serif",
+        fontSize: 36,
+        fontWeight: 700,
+        color: 'var(--text)',
+        marginBottom: 8,
+        lineHeight: 1.2,
+      }}>
+        أفضل أدوات AI لـ<em style={{ fontStyle: 'normal', color: 'var(--accent)' }}>{decoded}</em>
+      </h1>
+
+      <p style={{
+        fontFamily: "'Geist Mono', monospace",
+        fontSize: 13,
+        color: 'var(--text-muted)',
+        marginBottom: 40,
+      }}>
+        {tools.length} أداة — مرتبة من الأفضل للاستخدام
       </p>
 
-      <div className="space-y-4">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {tools.map((tool, i) => (
           <Link
             key={tool.slug}
             href={`/tools/${tool.slug}`}
-            className="flex items-start gap-4 border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow"
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 20,
+              backgroundColor: 'var(--surface)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-md)',
+              padding: '20px 24px',
+              textDecoration: 'none',
+              transition: 'border-color 0.2s',
+              cursor: 'pointer',
+            }}
+            className="card-hover"
           >
-            <span className="text-2xl font-bold text-gray-300 w-8 shrink-0">{i + 1}</span>
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <h2 className="text-lg font-semibold">{tool.name_ar}</h2>
+            {/* rank number */}
+            <span style={{
+              fontFamily: "'Geist Mono', monospace",
+              fontSize: 22,
+              fontWeight: 700,
+              color: i === 0 ? 'var(--accent)' : 'var(--border)',
+              width: 32,
+              flexShrink: 0,
+              lineHeight: 1,
+              paddingTop: 2,
+            }}>
+              {i + 1}
+            </span>
+
+            {/* content */}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, flexWrap: 'wrap' }}>
+                <span style={{
+                  fontFamily: "'Cairo', sans-serif",
+                  fontSize: 17,
+                  fontWeight: 700,
+                  color: 'var(--text)',
+                }}>
+                  {tool.name_ar}
+                </span>
+                <span style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: 12,
+                  color: 'var(--text-muted)',
+                }}>
+                  {tool.name}
+                </span>
                 {tool.is_free_tier && (
-                  <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                  <span style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: 11,
+                    fontWeight: 500,
+                    padding: '2px 10px',
+                    borderRadius: 'var(--radius-sm)',
+                    backgroundColor: 'rgba(76,175,125,0.12)',
+                    color: 'var(--success)',
+                    border: '1px solid rgba(76,175,125,0.3)',
+                  }}>
                     مجاني
                   </span>
                 )}
               </div>
-              <p className="text-gray-600 text-sm">{tool.description_ar}</p>
+              <p style={{
+                fontFamily: "'Cairo', sans-serif",
+                fontSize: 14,
+                color: 'var(--text-muted)',
+                lineHeight: 1.65,
+                margin: 0,
+              }}>
+                {tool.description_ar}
+              </p>
             </div>
-            {tool.price_from && (
-              <span className="text-blue-600 font-medium shrink-0">
-                ${tool.price_from}/شهر
-              </span>
-            )}
+
+            {/* price */}
+            <div style={{
+              fontFamily: "'Geist Mono', monospace",
+              fontSize: 14,
+              fontWeight: 500,
+              flexShrink: 0,
+              fontVariantNumeric: 'tabular-nums',
+              paddingTop: 2,
+              ...PRICING_STYLE(tool),
+            }}>
+              {tool.is_free_tier && !tool.price_from
+                ? 'مجاني'
+                : tool.price_from
+                ? `$${tool.price_from}/شهر`
+                : '—'}
+            </div>
           </Link>
         ))}
       </div>
