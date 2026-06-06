@@ -28,19 +28,50 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-bg text-text font-cairo antialiased">
-        <header className="bg-surface border-b border-border h-[60px] px-8 flex items-center justify-between">
-          <nav className="flex gap-7 font-cairo text-sm">
-            <a href="/tools" className="text-muted hover:text-text transition-colors duration-150">جميع الأدوات</a>
-            <a href="/tools" className="text-muted hover:text-text transition-colors duration-150">مقارنة</a>
-            <a href="/best/%D9%83%D8%AA%D8%A7%D8%A8%D8%A9" className="text-muted hover:text-text transition-colors duration-150">أفضل الأدوات</a>
+        <header style={{
+          backgroundColor: 'var(--surface)',
+          borderBottom: '1px solid var(--border)',
+          padding: '0 32px',
+          height: 60,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+          {/* nav — right side in RTL */}
+          <nav style={{ display: 'flex', gap: 28, listStyle: 'none' }}>
+            <a href="/best/%D9%83%D8%AA%D8%A7%D8%A8%D8%A9" style={{ fontFamily: "'Cairo', sans-serif", fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none' }}>أفضل الأدوات</a>
+            <a href="/tools" style={{ fontFamily: "'Cairo', sans-serif", fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none' }}>مقارنة</a>
+            <a href="/tools" style={{ fontFamily: "'Cairo', sans-serif", fontSize: 14, color: 'var(--accent)', textDecoration: 'none' }}>جميع الأدوات</a>
           </nav>
-          <a href="/" className="flex items-center gap-2 font-jakarta font-bold text-lg text-text no-underline">
-            <span className="w-2 h-2 rounded-full bg-accent" />
-            أدوات AI
-          </a>
+
+          {/* logo + search — left side in RTL */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            {/* search box */}
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: 8,
+              backgroundColor: 'var(--surface-2)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-sm)',
+              padding: '6px 14px',
+              width: 220,
+            }}>
+              <span style={{ color: 'var(--text-muted)', fontSize: 14 }}>⌕</span>
+              <span style={{ fontFamily: "'Cairo', sans-serif", fontSize: 13, color: 'var(--text-muted)' }}>ابحث عن أداة...</span>
+            </div>
+            {/* logo */}
+            <a href="/" style={{
+              display: 'flex', alignItems: 'center', gap: 8,
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 700, fontSize: 18,
+              color: 'var(--text)', textDecoration: 'none',
+            }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: 'var(--accent)', display: 'inline-block' }} />
+              أدوات AI
+            </a>
+          </div>
         </header>
 
-        <main className="max-w-content mx-auto px-6 pt-0 pb-8">
+        <main className="max-w-content mx-auto px-6 py-0">
           {children}
         </main>
 

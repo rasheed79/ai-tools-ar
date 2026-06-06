@@ -45,5 +45,6 @@
   }
   .card-hover:hover {
     border-color: var(--accent) !important;
+    transform: translateY(-1px);
   }
 }
