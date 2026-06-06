@@ -1,0 +1,61 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "أدوات AI" [ref=e3] [cursor=pointer]:
+      - /url: /
+    - navigation [ref=e4]:
+      - link "جميع الأدوات" [ref=e5] [cursor=pointer]:
+        - /url: /tools
+      - link "مقارنة" [ref=e6] [cursor=pointer]:
+        - /url: /tools
+      - link "أفضل الأدوات" [ref=e7] [cursor=pointer]:
+        - /url: /best/%D9%83%D8%AA%D8%A7%D8%A8%D8%A9
+  - main [ref=e8]:
+    - generic [ref=e9]:
+      - heading "مقارنة أدوات AI" [level=1] [ref=e10]
+      - paragraph [ref=e11]: "اختر أداتين للمقارنة:"
+      - generic [ref=e12]:
+        - link "تشات جي بي تي مقابل كلود" [ref=e13] [cursor=pointer]:
+          - /url: /compare/chatgpt-vs-claude
+        - link "تشات جي بي تي مقابل دالي 3" [ref=e14] [cursor=pointer]:
+          - /url: /compare/chatgpt-vs-dalle-3
+        - link "كلود مقابل تشات جي بي تي" [ref=e15] [cursor=pointer]:
+          - /url: /compare/claude-vs-chatgpt
+        - link "كلود مقابل دالي 3" [ref=e16] [cursor=pointer]:
+          - /url: /compare/claude-vs-dalle-3
+        - link "دالي 3 مقابل تشات جي بي تي" [ref=e17] [cursor=pointer]:
+          - /url: /compare/dalle-3-vs-chatgpt
+        - link "دالي 3 مقابل كلود" [ref=e18] [cursor=pointer]:
+          - /url: /compare/dalle-3-vs-claude
+        - link "إيليفن لابس مقابل تشات جي بي تي" [ref=e19] [cursor=pointer]:
+          - /url: /compare/elevenlabs-vs-chatgpt
+        - link "إيليفن لابس مقابل كلود" [ref=e20] [cursor=pointer]:
+          - /url: /compare/elevenlabs-vs-claude
+        - link "جيميني مقابل تشات جي بي تي" [ref=e21] [cursor=pointer]:
+          - /url: /compare/gemini-vs-chatgpt
+        - link "جيميني مقابل كلود" [ref=e22] [cursor=pointer]:
+          - /url: /compare/gemini-vs-claude
+        - link "كوبايلوت مقابل تشات جي بي تي" [ref=e23] [cursor=pointer]:
+          - /url: /compare/github-copilot-vs-chatgpt
+        - link "كوبايلوت مقابل كلود" [ref=e24] [cursor=pointer]:
+          - /url: /compare/github-copilot-vs-claude
+        - link "ميدجورني مقابل تشات جي بي تي" [ref=e25] [cursor=pointer]:
+          - /url: /compare/midjourney-vs-chatgpt
+        - link "ميدجورني مقابل كلود" [ref=e26] [cursor=pointer]:
+          - /url: /compare/midjourney-vs-claude
+        - link "نوشن AI مقابل تشات جي بي تي" [ref=e27] [cursor=pointer]:
+          - /url: /compare/notion-ai-vs-chatgpt
+        - link "نوشن AI مقابل كلود" [ref=e28] [cursor=pointer]:
+          - /url: /compare/notion-ai-vs-claude
+        - link "بيربلكسيتي مقابل تشات جي بي تي" [ref=e29] [cursor=pointer]:
+          - /url: /compare/perplexity-vs-chatgpt
+        - link "بيربلكسيتي مقابل كلود" [ref=e30] [cursor=pointer]:
+          - /url: /compare/perplexity-vs-claude
+        - link "رانواي مقابل تشات جي بي تي" [ref=e31] [cursor=pointer]:
+          - /url: /compare/runway-vs-chatgpt
+        - link "رانواي مقابل كلود" [ref=e32] [cursor=pointer]:
+          - /url: /compare/runway-vs-claude
+  - contentinfo [ref=e33]:
+    - paragraph [ref=e34]: © 2026 أدوات AI — دليل أدوات الذكاء الاصطناعي بالعربية
+  - button "Open Next.js Dev Tools" [ref=e40] [cursor=pointer]:
+    - img [ref=e41]
+  - alert [ref=e44]
