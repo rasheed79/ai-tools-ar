@@ -55,7 +55,7 @@ function buildSummary(alts: Tool[]): string {
   const freeCount = alts.filter((t) => t.is_free_tier).length
   const paidCount = alts.length - freeCount
   const parts: string[] = []
-  if (freeCount > 0) parts.push(`${freeCount} ${freeCount === 1 ? 'مجاني' : 'مجانية'}`)
+  if (freeCount > 0) parts.push(`${freeCount} ${freeCount === 1 ? 'فيه خطة مجانية' : 'فيها خطة مجانية'}`)
   if (paidCount > 0) parts.push(`${paidCount} ${paidCount === 1 ? 'مدفوع' : 'مدفوعة'}`)
   return parts.join(' · ')
 }
@@ -90,16 +90,14 @@ export default async function AlternativesPage({ params }: Props) {
                   <h2 className="text-lg font-semibold">{tool.name_ar}</h2>
                   {tool.is_free_tier && (
                     <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                      مجاني
+                      فيه خطة مجانية
                     </span>
                   )}
                 </div>
                 <p className="text-gray-600 text-sm">{tool.description_ar}</p>
               </div>
               <div className="text-left shrink-0">
-                {tool.is_free_tier ? (
-                  <span className="text-green-600 font-medium">مجاني</span>
-                ) : tool.price_from ? (
+                {tool.price_from ? (
                   <span className="text-blue-600 font-medium">${tool.price_from}/شهر</span>
                 ) : (
                   <span className="text-green-600 font-medium">مجاني</span>
