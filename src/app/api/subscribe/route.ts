@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'أدوات AI <newsletter@ai-tools-ar.com>',
+        from: 'دليل أدوات AI <newsletter@daleel-adawat.com>',
         to: [email],
         subject: 'مرحباً بك في نشرة أدوات AI بالعربية',
         html: '<div dir="rtl"><h2>أهلاً وسهلاً!</h2><p>ستصلك آخر أخبار أدوات الذكاء الاصطناعي بالعربية مباشرة إلى بريدك.</p></div>',

@@ -4,7 +4,6 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { convertCurrency, FALLBACK_RATES } from '@/lib/currency'
 
-export const dynamic = 'force-dynamic'
 export const revalidate = 3600
 
 type Props = { params: Promise<{ pair: string }> }

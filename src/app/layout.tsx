@@ -75,7 +75,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
 
         <footer className="border-t border-border mt-16 py-8 px-6 text-center text-sm text-muted font-cairo">
-          <p>© 2026 أدوات AI — دليل أدوات الذكاء الاصطناعي بالعربية</p>
+          <p>© 2026 دليل أدوات AI — دليل أدوات الذكاء الاصطناعي بالعربية</p>
+          <div style={{ marginTop: 12, display: 'flex', gap: 24, justifyContent: 'center' }}>
+            <a href="/about" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontFamily: "'Cairo', sans-serif", fontSize: 13 }}>عن الموقع</a>
+            <a href="/privacy" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontFamily: "'Cairo', sans-serif", fontSize: 13 }}>سياسة الخصوصية</a>
+            <a href="/tools" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontFamily: "'Cairo', sans-serif", fontSize: 13 }}>جميع الأدوات</a>
+          </div>
         </footer>
       </body>
     </html>

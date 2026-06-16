@@ -7,4 +7,4 @@ compatibility_flags = ["nodejs_compat"]
 directory = ".open-next/assets"
 
 [vars]
-NEXT_PUBLIC_SITE_URL = "https://ai-tools-ar.workers.dev"
+NEXT_PUBLIC_SITE_URL = "https://daleel-adawat.com"

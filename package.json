@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --passWithNoTests",
-    "audit": "ts-node --project tsconfig.scripts.json scripts/audit-content.ts"
+    "audit": "ts-node --project tsconfig.scripts.json scripts/audit-content.ts",
+    "seed": "ts-node --project tsconfig.scripts.json scripts/seed-tools.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

@@ -70,8 +70,13 @@ async function getAllCategories(): Promise<string[]> {
   return [...new Set(data.map((t) => t.category))]
 }
 
+async function getToolCount(): Promise<number> {
+  const { count } = await supabase.from('tools').select('*', { count: 'exact', head: true })
+  return count ?? 0
+}
+
 export default async function HomePage() {
-  const [tools, categories] = await Promise.all([getTools(), getAllCategories()])
+  const [tools, categories, toolCount] = await Promise.all([getTools(), getAllCategories(), getToolCount()])
 
   return (
     <div>
@@ -149,7 +154,7 @@ export default async function HomePage() {
             }}>
               اكتشف الأدوات ←
             </Link>
-            <Link href="/tools" style={{
+            <Link href="/compare" style={{
               fontFamily: "'Cairo', sans-serif",
               fontWeight: 700,
               fontSize: 14,
@@ -173,8 +178,8 @@ export default async function HomePage() {
             borderTop: '1px solid var(--border)',
           }}>
             {[
-              { num: '250+', label: 'أداة مُراجَعة' },
-              { num: '12',   label: 'تصنيف' },
+              { num: toolCount > 0 ? `${toolCount}+` : '—', label: 'أداة مُراجَعة' },
+              { num: categories.length > 0 ? `${categories.length}` : '5', label: 'تصنيف' },
               { num: '6',    label: 'عملات محلية' },
               { num: 'يومياً', label: 'تحديث الأسعار' },
             ].map(({ num, label }) => (
