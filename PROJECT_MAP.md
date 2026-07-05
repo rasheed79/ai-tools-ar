@@ -45,6 +45,13 @@
   - **HeyGen — blocked**, official affiliate program was merged into "Social Creator Program" requiring 5K+ social followers (doesn't fit an SEO/content site). Emailed `affiliates@heygen.com` directly requesting website-affiliate access instead of retrying the form.
   - Found real affiliate program links (not yet applied) for: Writesonic (`affiliates.writesonic.com`, 30% recurring), Rytr (`affiliates.rytr.me/signup`, 30% recurring 12mo), RunwayML (`affiliates.runwayml.com`, 20% recurring via Awin), Synthesia (`synthesia.getrewardful.com/signup`, 25% first 12mo), Adobe Firefly (via Adobe's general Partnerize-based affiliate program, not Firefly-specific).
   - **Canva — Canvassador program currently closed** for new applications, can't join right now.
+  - **PartnerStack Network application — declined** ("Business could not be verified as genuine"). Blocks QuillBot/Descript/Murf AI from ever activating until re-approved. ElevenLabs unaffected (was active before decline). Root causes: domain too new (created June 2026), no business registration on file, LinkedIn is a personal profile not a company page, thin `/about` page. Don't mass-reapply — fix credibility signals first (see Credibility Tasks below), wait 1-2 months for domain age, then reapply once.
+
+## Credibility Tasks (for PartnerStack re-application + affiliate trust generally)
+1. Create a LinkedIn Company Page for "Daleel Adawat", link it from the site and from the PartnerStack profile (replace the personal LinkedIn link).
+2. Flesh out `/about` page: real founder info, contact email, what the site actually does — not a placeholder.
+3. Add real business registration info if one exists (Saudi freelance/commercial registration) to the PartnerStack profile.
+4. Let domain age pass 1-2 months before reapplying to PartnerStack Network — reapplying immediately with the same signals will likely get declined again.
 
 ## Pricing Audit 2026-07-05 (all 34 tools checked against official pricing pages)
 Fixed (`price_from` was wrong):
@@ -60,18 +67,20 @@ Confirmed correct, no change: ChatGPT, Claude, Cursor, DALL-E 3, Descript, Gemin
 Flagged, needs content rewrite (not just a number): **Notion AI** — standalone AI add-on was discontinued; AI now bundled into Business plan ($20/seat), Plus ($10/seat) only gives a trial. **Flux AI** — Black Forest Labs has no official monthly subscription, it's pay-per-image; the $10/mo figure doesn't reflect their real pricing model.
 
 ## Pending — priority order
-1. Wait on approvals: Grammarly (Impact.com), QuillBot/Descript/Murf AI (PartnerStack Network) — fill `affiliate_url` for each once approved.
-2. Wait on HeyGen email reply (`affiliates@heygen.com`).
-3. Apply directly on vendor sites: Writesonic, Rytr, RunwayML, Synthesia, Adobe Firefly (links found, not yet applied).
-4. Retry Canva later — Canvassador program currently closed.
-5. Still need to check: Pictory AI (no program found yet).
-6. Rewrite Notion AI and Flux AI pricing sections to reflect their real pricing model (not just a number fix).
-7. Investigate why compare/best pages aren't ranking — thin content vs real backlinks needed.
-8. Fix 4x 404 + 2x duplicate-canonical pages flagged by GSC.
-9. T2: User reviews/ratings (UGC) — after AdSense approval
-10. T3: Backlinks / Arabic community outreach (Telegram + X)
-11. T7: Cloudflare KV for live exchange rates (fallback static rates in use now)
-12. T8: Pagination on `/tools` page (needed at 100+ tools)
-13. T4: Public read API for Arabic devs (Phase 3, 500+ tools)
-14. T5: Historical price tracking (Phase 3, 3+ months data)
-15. T6: Move to Vercel Pro / Railway for ISR at 5000+ pages
+1. Apply directly on vendor sites (unaffected by PartnerStack decline): Writesonic, Rytr, RunwayML, Synthesia, Adobe Firefly.
+2. Do Credibility Tasks (see above) — needed before any PartnerStack reapplication.
+3. Wait on approvals: Grammarly (Impact.com) — fill `affiliate_url` once approved.
+4. Wait on HeyGen email reply (`affiliates@heygen.com`).
+5. After credibility tasks + domain age improve: reapply once to PartnerStack Network — unlocks QuillBot, Descript, Murf AI.
+6. Retry Canva later — Canvassador program currently closed.
+7. Still need to check: Pictory AI (no program found yet).
+8. Rewrite Notion AI and Flux AI pricing sections to reflect their real pricing model (not just a number fix).
+9. Investigate why compare/best pages aren't ranking — thin content vs real backlinks needed.
+10. Fix 4x 404 + 2x duplicate-canonical pages flagged by GSC.
+11. T2: User reviews/ratings (UGC) — after AdSense approval
+12. T3: Backlinks / Arabic community outreach (Telegram + X)
+13. T7: Cloudflare KV for live exchange rates (fallback static rates in use now)
+14. T8: Pagination on `/tools` page (needed at 100+ tools)
+15. T4: Public read API for Arabic devs (Phase 3, 500+ tools)
+16. T5: Historical price tracking (Phase 3, 3+ months data)
+17. T6: Move to Vercel Pro / Railway for ISR at 5000+ pages
