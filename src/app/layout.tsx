@@ -9,6 +9,9 @@ export const metadata: Metadata = {
       'ar': process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ai-tools-ar.pages.dev',
     },
   },
+  other: {
+    'impact-site-verification': 'b48bc906-4c2f-421e-bd3c-0f50a97bd9b4',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
