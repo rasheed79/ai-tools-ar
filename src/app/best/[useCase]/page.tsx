@@ -3,6 +3,7 @@ import type { Tool } from '@/lib/database.types'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { buildBestIntro } from '@/lib/verdict'
 
 export const revalidate = 86400
 
@@ -40,6 +41,8 @@ export default async function BestToolsPage({ params }: Props) {
 
   if (!tools.length) notFound()
 
+  const intro = buildBestIntro(decoded, tools)
+
   return (
     <div style={{ padding: '40px 0' }}>
       {/* eyebrow */}
@@ -70,12 +73,13 @@ export default async function BestToolsPage({ params }: Props) {
       </h1>
 
       <p style={{
-        fontFamily: "'Geist Mono', monospace",
-        fontSize: 13,
+        fontFamily: "'Cairo', sans-serif",
+        fontSize: 15,
         color: 'var(--text-muted)',
+        lineHeight: 1.8,
         marginBottom: 40,
       }}>
-        {tools.length} أداة — مرتبة من الأفضل للاستخدام
+        {intro}
       </p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

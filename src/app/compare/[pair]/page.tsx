@@ -3,6 +3,7 @@ import type { Tool } from '@/lib/database.types'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { convertCurrency, FALLBACK_RATES } from '@/lib/currency'
+import { buildCompareVerdict } from '@/lib/verdict'
 
 export const revalidate = 3600
 
@@ -53,6 +54,7 @@ export default async function ComparePage({ params }: Props) {
   const [toolA, toolB] = tools
 
   const sarRate = FALLBACK_RATES['SAR']
+  const verdict = buildCompareVerdict(toolA, toolB)
 
   const rows: { label: string; a: React.ReactNode; b: React.ReactNode }[] = [
     {
@@ -134,8 +136,8 @@ export default async function ComparePage({ params }: Props) {
         <span className="text-muted font-light mx-3" style={{ fontSize: '24px' }}>vs</span>
         {toolB.name_ar}
       </h1>
-      <p className="font-cairo text-muted mb-8" style={{ fontSize: '15px' }}>
-        مقارنة تفصيلية — اختر الأنسب لاحتياجاتك
+      <p className="font-cairo text-muted mb-8" style={{ fontSize: '15px', lineHeight: 1.8 }}>
+        {verdict}
       </p>
 
       {/* Use case pills */}
