@@ -80,6 +80,9 @@ Flagged, needs content rewrite (not just a number): **Notion AI** — standalone
 - **Adobe Firefly affiliate — requested.** Signed up on Partnerize (`join.partnerize.com/adobe/en`), username `daleeladawat`, Publisher ID `1100l431755`. Joined the Adobe campaign — status "requested", awaiting Adobe's decision (same wait pattern as Grammarly/Writesonic). Tracking link once approved: `https://www.adobe.com/?sdid=49F59KY6`.
 - **AdSense re-submitted:** consent message configured (Google's CMP, 3-choice option), Ads.txt added (`public/ads.txt`, was "Not found"), Ads settings confirmed (Auto ads enabled). All onboarding steps show green — site now fully in Google's manual review queue. No further action possible until Google emails a decision (1-14 days typical).
 - `/about` page checked — already has real Q&A content, not a contributor to the low-value-content flag.
+- **GSC 404 fix:** root cause found — `sitemap.ts` and the compare-page pills linked to `/best/صوت`, `/best/فيديو`, `/best/عمل`, but no tool's `use_cases` array had those exact strings (had "محتوى صوتي" etc instead), so the pages 404'd. Fixed `getToolsByUseCase` to substring-match, dropped "عمل" (no match even with substring), replaced hard `notFound()` with a friendly empty state. The other 2 flagged 404s (`/&`, `/$`) are bot-probe noise, not a site bug — left alone.
+- **GSC duplicate-canonical fix:** site had zero `<link rel="canonical">` tags anywhere. Added `metadataBase` to root layout + explicit `alternates.canonical` on `/` and `/tools` (the two flagged URLs were `http://.../` and `/tools?category=code`).
+- **Follow-up reminder — check back in ~1 week (around 2026-07-13):** click "Validate Fix" in GSC for both the 404 and duplicate-canonical reports, confirm they clear. Also check: AdSense decision email, Adobe Partnerize approval, Grammarly/Writesonic approvals, and whether any outreach posts (see below) got engagement.
 
 ## Pending — priority order
 1. **Waiting on Google:** AdSense manual review decision (email notification).
@@ -91,8 +94,8 @@ Flagged, needs content rewrite (not just a number): **Notion AI** — standalone
 7. Retry Canva later — Canvassador program currently closed.
 8. Still need to check: Pictory AI (no program found yet).
 9. Rewrite Notion AI and Flux AI pricing sections to reflect their real pricing model (not just a number fix).
-10. Real backlinks / Arabic community outreach — still the core traffic bottleneck (avg GSC position 37.8), content fix alone won't solve ranking.
-11. Fix 4x 404 + 2x duplicate-canonical pages flagged by GSC (URLs not yet identified — need user to pull them from Search Console).
+10. Real backlinks / Arabic community outreach — still the core traffic bottleneck (avg GSC position 37.8), content fix alone won't solve ranking. Posting schedule + full post text: `scripts/outreach-posts.md` and dashboard.
+11. GSC 404 + duplicate-canonical — fixed in code (2026-07-06), needs "Validate Fix" click + wait for Google to confirm (~1 week).
 12. T2: User reviews/ratings (UGC) — after AdSense approval
 13. T3: Backlinks / Arabic community outreach (Telegram + X)
 14. T7: Cloudflare KV for live exchange rates (fallback static rates in use now)
