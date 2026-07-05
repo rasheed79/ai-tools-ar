@@ -6,7 +6,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://daleel-adawat.com'
 const USE_CASES = ['كتابة', 'تسويق', 'تعليم', 'برمجة', 'تصميم', 'فيديو', 'صوت', 'بحث', 'عمل', 'إبداع']
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const { data: toolsData } = await supabase.from('tools').select('slug').order('name')
+  const { data: toolsData } = await supabase.from('tools').select('slug,category').order('name')
   const tools = toolsData ?? []
 
   const toolUrls: MetadataRoute.Sitemap = tools.map((t) => ({
@@ -18,6 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const compareUrls: MetadataRoute.Sitemap = []
   for (let i = 0; i < tools.length; i++) {
     for (let j = i + 1; j < tools.length; j++) {
+      if (tools[i].category !== tools[j].category) continue
       compareUrls.push({
         url: `${BASE_URL}/compare/${tools[i].slug}-vs-${tools[j].slug}`,
         changeFrequency: 'weekly' as const,
