@@ -8,6 +8,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: 'جميع أدوات الذكاء الاصطناعي',
   description: 'دليل شامل لأدوات AI بالعربية — مراجعات، أسعار، ومقارنات',
+  alternates: { canonical: '/tools' },
 }
 
 const CATEGORY_LABELS: Record<string, string> = {

@@ -1,12 +1,15 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://daleel-adawat.com'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: { default: 'أدوات الذكاء الاصطناعي بالعربية', template: '%s | أدوات AI' },
   description: 'دليل أدوات الذكاء الاصطناعي بالعربية — أسعار بعملتك المحلية، مقارنات، بدائل مجانية',
   alternates: {
     languages: {
-      'ar': process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ai-tools-ar.pages.dev',
+      'ar': SITE_URL,
     },
   },
   other: {

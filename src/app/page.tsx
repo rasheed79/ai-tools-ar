@@ -1,8 +1,13 @@
 import { supabase } from '@/lib/supabase'
 import type { Tool } from '@/lib/database.types'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 
 export const revalidate = 3600
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+}
 
 const CATEGORY_LABELS: Record<string, string> = {
   writing: 'كتابة',
