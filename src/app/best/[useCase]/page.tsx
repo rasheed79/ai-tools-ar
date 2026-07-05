@@ -1,7 +1,6 @@
 import { supabase } from '@/lib/supabase'
 import type { Tool } from '@/lib/database.types'
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { buildBestIntro } from '@/lib/verdict'
 
@@ -22,10 +21,12 @@ async function getToolsByUseCase(decoded: string): Promise<Tool[]> {
   const { data, error } = await supabase
     .from('tools')
     .select('*')
-    .contains('use_cases', [decoded])
     .order('is_free_tier', { ascending: false })
   if (error || !data) return []
-  return data as Tool[]
+  // substring match — "صوت" should also catch "محتوى صوتي", "تحويل نص إلى صوت", etc.
+  return (data as Tool[]).filter((t) =>
+    t.use_cases?.some((uc) => uc.includes(decoded) || decoded.includes(uc))
+  )
 }
 
 const PRICING_STYLE = (tool: Tool): React.CSSProperties => {
@@ -39,7 +40,21 @@ export default async function BestToolsPage({ params }: Props) {
   const decoded = decodeURIComponent(useCase)
   const tools = await getToolsByUseCase(decoded)
 
-  if (!tools.length) notFound()
+  if (!tools.length) {
+    return (
+      <div style={{ padding: '40px 0', maxWidth: 560 }}>
+        <h1 className="font-cairo font-bold text-text mb-4" style={{ fontSize: 28 }}>
+          ما فيه أدوات لـ{decoded} بعد
+        </h1>
+        <p className="font-cairo text-muted mb-6" style={{ fontSize: 15, lineHeight: 1.8 }}>
+          نضيف أدوات جديدة باستمرار. تصفح كل الأدوات أو جرّب استخدام ثاني.
+        </p>
+        <a href="/tools" className="font-cairo font-bold text-sm no-underline" style={{ color: 'var(--accent)' }}>
+          جميع الأدوات ←
+        </a>
+      </div>
+    )
+  }
 
   const intro = buildBestIntro(decoded, tools)
 

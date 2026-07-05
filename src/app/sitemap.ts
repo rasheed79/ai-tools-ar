@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://daleel-adawat.com'
 
-const USE_CASES = ['كتابة', 'تسويق', 'تعليم', 'برمجة', 'تصميم', 'فيديو', 'صوت', 'بحث', 'عمل', 'إبداع']
+const USE_CASES = ['كتابة', 'تسويق', 'تعليم', 'برمجة', 'تصميم', 'فيديو', 'صوت', 'بحث', 'إبداع']
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { data: toolsData } = await supabase.from('tools').select('slug,category').order('name')
