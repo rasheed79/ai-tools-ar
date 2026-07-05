@@ -43,7 +43,10 @@
   - **Descript — on hold**, applied via PartnerStack marketplace, blocked on PartnerStack Network application approval (was previously declined once, re-applied — profile now 94%+ complete to improve odds).
   - **Murf AI — on hold**, found on PartnerStack marketplace, applied, same Network approval block as Descript.
   - **HeyGen — blocked**, official affiliate program was merged into "Social Creator Program" requiring 5K+ social followers (doesn't fit an SEO/content site). Emailed `affiliates@heygen.com` directly requesting website-affiliate access instead of retrying the form.
-  - Found real affiliate program links (not yet applied) for: Writesonic (`affiliates.writesonic.com`, 30% recurring), Rytr (`affiliates.rytr.me/signup`, 30% recurring 12mo), RunwayML (`affiliates.runwayml.com`, 20% recurring via Awin), Synthesia (`synthesia.getrewardful.com/signup`, 25% first 12mo), Adobe Firefly (via Adobe's general Partnerize-based affiliate program, not Firefly-specific).
+  - **Rytr — ✅ live**, instant approval (no review), `affiliate_url` set to `https://rytr.me?via=abdulrashid-abdulkarim`, 30% commission.
+  - **Writesonic — pending**, applied via `affiliates.writesonic.com`, awaiting approval.
+  - Found real affiliate program links (not yet applied) for: RunwayML (`affiliates.runwayml.com`, 20% recurring via Awin), Synthesia (`synthesia.getrewardful.com/signup`, 25% first 12mo), Adobe Firefly (via Adobe's general Partnerize-based affiliate program, not Firefly-specific).
+  - Note: anon Supabase key *can* UPDATE `tools` rows via REST (RLS allows it), just not DELETE — no need for SQL editor to set affiliate_url going forward, only for deletes.
   - **Canva — Canvassador program currently closed** for new applications, can't join right now.
   - **PartnerStack Network application — declined** ("Business could not be verified as genuine"). Blocks QuillBot/Descript/Murf AI from ever activating until re-approved. ElevenLabs unaffected (was active before decline). Root causes: domain too new (created June 2026), no business registration on file, LinkedIn is a personal profile not a company page, thin `/about` page. Don't mass-reapply — fix credibility signals first (see Credibility Tasks below), wait 1-2 months for domain age, then reapply once.
 
@@ -67,9 +70,9 @@ Confirmed correct, no change: ChatGPT, Claude, Cursor, DALL-E 3, Descript, Gemin
 Flagged, needs content rewrite (not just a number): **Notion AI** — standalone AI add-on was discontinued; AI now bundled into Business plan ($20/seat), Plus ($10/seat) only gives a trial. **Flux AI** — Black Forest Labs has no official monthly subscription, it's pay-per-image; the $10/mo figure doesn't reflect their real pricing model.
 
 ## Pending — priority order
-1. Apply directly on vendor sites (unaffected by PartnerStack decline): Writesonic, Rytr, RunwayML, Synthesia, Adobe Firefly.
+1. Apply directly on vendor sites (unaffected by PartnerStack decline): RunwayML, Synthesia, Adobe Firefly.
 2. Do Credibility Tasks (see above) — needed before any PartnerStack reapplication.
-3. Wait on approvals: Grammarly (Impact.com) — fill `affiliate_url` once approved.
+3. Wait on approvals: Grammarly (Impact.com), Writesonic — fill `affiliate_url` once approved.
 4. Wait on HeyGen email reply (`affiliates@heygen.com`).
 5. After credibility tasks + domain age improve: reapply once to PartnerStack Network — unlocks QuillBot, Descript, Murf AI.
 6. Retry Canva later — Canvassador program currently closed.
