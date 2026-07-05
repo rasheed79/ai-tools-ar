@@ -29,14 +29,23 @@
 - **Search visibility: ❌ near zero.** 702 pages indexed, but avg position 37.8 (page 4). All top queries are about "حاسبة نهاية الخدمة" (App_01/mokafaa subdomain traffic) — the AI-tools directory content itself gets ~0 impressions/clicks. Site exists technically but invisible in search.
 - 128 pages not indexed: 75 "discovered-not indexed" + 47 "crawled-not indexed" (likely thin/duplicate compare pages), 4x 404, 2x duplicate-no-canonical.
 
+## Session 2026-07-05 — fixes applied + affiliate signup started
+- Fixed: deleted duplicate `Jasper AI` row in Supabase (`jasper-ai` slug), kept `jasper`.
+- Fixed: [sitemap.ts](src/app/sitemap.ts) now only lists same-category compare pairs (was ~528 pairs incl. nonsensical cross-category, e.g. audio vs image; now filtered).
+- Fixed: replaced placeholder logo (colored dot + letter icon) with real brand logo — `public/logo.png` (header) + `src/app/icon.png` (favicon), both live.
+- Added `impact-site-verification` meta tag to layout.tsx metadata for Impact.com media-property verification (Grammarly affiliate program uses Impact.com).
+- Affiliate program signups: **Jasper AI — dead, program discontinued Jan 2025.** **Copy.ai — dead, program discontinued.** **Grammarly — in progress**, account + tax info + profile done on Impact.com, site verification submitted. QuillBot (`quillbot.com/affiliates`, via PartnerStack) still queued.
+- Still need affiliate signups for: QuillBot, Writesonic, Rytr, Canva AI, Adobe Firefly, RunwayML, Synthesia, HeyGen, Pictory AI, Murf AI, Descript — verify each program is still live before spending time (2 of first 3 tried were already dead).
+
 ## Pending — priority order
-1. Fill `affiliate_url` for the 33 tools missing it (direct revenue unlock).
-2. Investigate why compare/best pages aren't ranking — thin content vs real backlinks needed.
-3. Fix 4x 404 + 2x duplicate-canonical pages flagged by GSC.
-4. T2: User reviews/ratings (UGC) — after AdSense approval
-5. T3: Backlinks / Arabic community outreach (Telegram + X)
-6. T7: Cloudflare KV for live exchange rates (fallback static rates in use now)
-7. T8: Pagination on `/tools` page (needed at 100+ tools)
-8. T4: Public read API for Arabic devs (Phase 3, 500+ tools)
-9. T5: Historical price tracking (Phase 3, 3+ months data)
-10. T6: Move to Vercel Pro / Railway for ISR at 5000+ pages
+1. Finish Grammarly Impact.com verification, then get real affiliate link into Supabase `affiliate_url`.
+2. Sign up remaining live affiliate programs (see list above), fill `affiliate_url` for each.
+3. Investigate why compare/best pages aren't ranking — thin content vs real backlinks needed.
+4. Fix 4x 404 + 2x duplicate-canonical pages flagged by GSC.
+5. T2: User reviews/ratings (UGC) — after AdSense approval
+6. T3: Backlinks / Arabic community outreach (Telegram + X)
+7. T7: Cloudflare KV for live exchange rates (fallback static rates in use now)
+8. T8: Pagination on `/tools` page (needed at 100+ tools)
+9. T4: Public read API for Arabic devs (Phase 3, 500+ tools)
+10. T5: Historical price tracking (Phase 3, 3+ months data)
+11. T6: Move to Vercel Pro / Railway for ISR at 5000+ pages
