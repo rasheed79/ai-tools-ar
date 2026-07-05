@@ -34,18 +34,38 @@
 - Fixed: [sitemap.ts](src/app/sitemap.ts) now only lists same-category compare pairs (was ~528 pairs incl. nonsensical cross-category, e.g. audio vs image; now filtered).
 - Fixed: replaced placeholder logo (colored dot + letter icon) with real brand logo — `public/logo.png` (header) + `src/app/icon.png` (favicon), both live.
 - Added `impact-site-verification` meta tag to layout.tsx metadata for Impact.com media-property verification (Grammarly affiliate program uses Impact.com).
-- Affiliate program signups: **Jasper AI — dead, program discontinued Jan 2025.** **Copy.ai — dead, program discontinued.** **Grammarly — in progress**, account + tax info + profile done on Impact.com, site verification submitted. QuillBot (`quillbot.com/affiliates`, via PartnerStack) still queued.
-- Still need affiliate signups for: QuillBot, Writesonic, Rytr, Canva AI, Adobe Firefly, RunwayML, Synthesia, HeyGen, Pictory AI, Murf AI, Descript — verify each program is still live before spending time (2 of first 3 tried were already dead).
+- **Full pricing audit of all 34 tools done against official sources** (see Pricing Audit below). 6 rows had wrong `price_from` — fixed via SQL.
+- Affiliate program status:
+  - **ElevenLabs — ✅ live**, `affiliate_url` already set (`try.elevenlabs.io/quowwx3u0oeu`), confirmed via PartnerStack.
+  - **Jasper AI, Copy.ai — dead**, programs discontinued, do not retry.
+  - **Grammarly — pending**, Impact.com account + tax info + profile + site verification all done, waiting on approval.
+  - **QuillBot — pending**, applied via PartnerStack (quillbot.com/affiliates), awaiting approval.
+  - **Descript — on hold**, applied via PartnerStack marketplace, blocked on PartnerStack Network application approval (was previously declined once, re-applied).
+  - No affiliate program found in PartnerStack marketplace for: Writesonic, Rytr, Canva AI, Adobe Firefly, RunwayML, Synthesia, HeyGen, Pictory AI, Murf AI — check each vendor's own site directly (Impact.com/FirstPromoter/etc) next.
+
+## Pricing Audit 2026-07-05 (all 34 tools checked against official pricing pages)
+Fixed (`price_from` was wrong):
+- Adobe Firefly: $5 → $10 (Standard $9.99/mo)
+- Copy.ai: $49 → $29 (repriced 2025, old $49 Pro tier no longer exists)
+- Leonardo AI: $10 → $12 (Essential $12/mo; $10 was the annual-billing rate)
+- Pictory AI: $23 → $25 (Starter $25/mo annual, $29/mo monthly — official site confirmed)
+- Writesonic: $16 → $79 (repriced to enterprise-tier structure; official site confirmed Starter $79/mo, way off old figure)
+- QuillBot: $10 → $8 (official annual rate $8.33/mo; no flat $10 tier exists)
+
+Confirmed correct, no change: ChatGPT, Claude, Cursor, DALL-E 3, Descript, Gemini, GitHub Copilot, Grammarly, HeyGen, Ideogram, Midjourney, Murf AI, Perplexity, Replit AI, RunwayML, Rytr, Sora, Suno AI, Tabnine, v0, Jasper, Canva AI, ElevenLabs.
+
+Flagged, needs content rewrite (not just a number): **Notion AI** — standalone AI add-on was discontinued; AI now bundled into Business plan ($20/seat), Plus ($10/seat) only gives a trial. **Flux AI** — Black Forest Labs has no official monthly subscription, it's pay-per-image; the $10/mo figure doesn't reflect their real pricing model.
 
 ## Pending — priority order
-1. Finish Grammarly Impact.com verification, then get real affiliate link into Supabase `affiliate_url`.
-2. Sign up remaining live affiliate programs (see list above), fill `affiliate_url` for each.
-3. Investigate why compare/best pages aren't ranking — thin content vs real backlinks needed.
-4. Fix 4x 404 + 2x duplicate-canonical pages flagged by GSC.
-5. T2: User reviews/ratings (UGC) — after AdSense approval
-6. T3: Backlinks / Arabic community outreach (Telegram + X)
-7. T7: Cloudflare KV for live exchange rates (fallback static rates in use now)
-8. T8: Pagination on `/tools` page (needed at 100+ tools)
-9. T4: Public read API for Arabic devs (Phase 3, 500+ tools)
-10. T5: Historical price tracking (Phase 3, 3+ months data)
-11. T6: Move to Vercel Pro / Railway for ISR at 5000+ pages
+1. Wait on Grammarly, QuillBot, Descript, and PartnerStack Network application approvals — fill `affiliate_url` for each once approved.
+2. Check official sites directly for affiliate programs: Writesonic, Rytr, Canva AI, Adobe Firefly, RunwayML, Synthesia, HeyGen, Pictory AI, Murf AI.
+3. Rewrite Notion AI and Flux AI pricing sections to reflect their real pricing model (not just a number fix).
+4. Investigate why compare/best pages aren't ranking — thin content vs real backlinks needed.
+5. Fix 4x 404 + 2x duplicate-canonical pages flagged by GSC.
+6. T2: User reviews/ratings (UGC) — after AdSense approval
+7. T3: Backlinks / Arabic community outreach (Telegram + X)
+8. T7: Cloudflare KV for live exchange rates (fallback static rates in use now)
+9. T8: Pagination on `/tools` page (needed at 100+ tools)
+10. T4: Public read API for Arabic devs (Phase 3, 500+ tools)
+11. T5: Historical price tracking (Phase 3, 3+ months data)
+12. T6: Move to Vercel Pro / Railway for ISR at 5000+ pages
