@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             fontWeight: 700, fontSize: 18,
             color: 'var(--text)', textDecoration: 'none', cursor: 'pointer',
           }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: 'var(--accent)', display: 'inline-block' }} />
+            <img src="/logo.png" alt="" width={24} height={24} style={{ borderRadius: 6 }} />
             أدوات AI
           </a>
 
