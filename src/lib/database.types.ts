@@ -5,6 +5,7 @@ export type Tool = {
   name_ar: string
   category: 'writing' | 'image' | 'code' | 'video' | 'audio'
   description_ar: string
+  review_ar: string | null
   pricing: 'مجاني' | 'مدفوع' | 'freemium'
   price_from: number | null
   price_currency: string

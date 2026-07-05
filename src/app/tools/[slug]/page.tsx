@@ -101,6 +101,19 @@ export default async function ToolPage({ params }: Props) {
           {tool.description_ar}
         </p>
 
+        {/* Long-form review */}
+        {tool.review_ar && (
+          <section className="mb-10">
+            <h2 className="font-cairo font-semibold text-text text-xl mb-4">مراجعة {tool.name_ar}</h2>
+            <p
+              className="font-cairo text-muted"
+              style={{ fontSize: '15px', lineHeight: 1.9 }}
+            >
+              {tool.review_ar}
+            </p>
+          </section>
+        )}
+
         {/* Pricing section */}
         {tool.price_from && (
           <section

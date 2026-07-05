@@ -53,6 +53,7 @@ describe('buildJsonLd', () => {
     name_ar: 'تشات جي بي تي',
     category: 'writing',
     description_ar: 'مساعد ذكاء اصطناعي',
+    review_ar: null,
     pricing: 'freemium',
     price_from: 20,
     price_currency: 'USD',

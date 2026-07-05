@@ -9,6 +9,7 @@ create table if not exists tools (
   name_ar        text not null,
   category       text not null check (category in ('writing','image','code','video','audio')),
   description_ar text not null,
+  review_ar      text,
   pricing        text not null check (pricing in ('مجاني','مدفوع','freemium')),
   price_from     numeric,
   price_currency text not null default 'USD',
