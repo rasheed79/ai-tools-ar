@@ -72,21 +72,31 @@ Confirmed correct, no change: ChatGPT, Claude, Cursor, DALL-E 3, Descript, Gemin
 
 Flagged, needs content rewrite (not just a number): **Notion AI** — standalone AI add-on was discontinued; AI now bundled into Business plan ($20/seat), Plus ($10/seat) only gives a trial. **Flux AI** — Black Forest Labs has no official monthly subscription, it's pay-per-image; the $10/mo figure doesn't reflect their real pricing model.
 
+## Session 2026-07-06 — AdSense "low value content" fix + Adobe affiliate link found
+- **AdSense rejected site** with "We found some policy violations — Low value content" (tool pages had only 1-line description + price table + feature bullets, no original prose).
+- **Fixed:** added `review_ar` column to `tools` table (migration: `supabase/add-review-ar.sql`). Wrote and pushed a 150-220 word original Arabic review for all 32 tools currently in DB (via REST PATCH, `scripts/reviews.json` holds the source text). Rendered on `/tools/[slug]` under a "مراجعة" heading.
+- **Fixed:** `/best/[useCase]` and `/compare/[pair]` were bare data tables/lists (same thin-content risk). Added `src/lib/verdict.ts` — generates a computed Arabic verdict paragraph per page (cheapest option, feature-count comparison, category framing) from existing tool fields, no per-page hand-written content needed.
+- Verified live on production (daleel-adawat.com) after deploy: review text, best-page intro, and compare-page verdict all confirmed rendering.
+- **Adobe Firefly affiliate — requested.** Signed up on Partnerize (`join.partnerize.com/adobe/en`), username `daleeladawat`, Publisher ID `1100l431755`. Joined the Adobe campaign — status "requested", awaiting Adobe's decision (same wait pattern as Grammarly/Writesonic). Tracking link once approved: `https://www.adobe.com/?sdid=49F59KY6`.
+- **AdSense re-submitted:** consent message configured (Google's CMP, 3-choice option), Ads.txt added (`public/ads.txt`, was "Not found"), Ads settings confirmed (Auto ads enabled). All onboarding steps show green — site now fully in Google's manual review queue. No further action possible until Google emails a decision (1-14 days typical).
+- `/about` page checked — already has real Q&A content, not a contributor to the low-value-content flag.
+
 ## Pending — priority order
-1. Apply directly on Adobe Firefly's general affiliate program (unaffected by PartnerStack decline).
-2. Do Credibility Tasks (see above) — needed before any PartnerStack reapplication.
-3. Wait on approvals: Grammarly (Impact.com), Writesonic — fill `affiliate_url` once approved.
-4. Wait on HeyGen email reply (`affiliates@heygen.com`).
-5. After credibility tasks + domain age improve: reapply once to PartnerStack Network — unlocks QuillBot, Descript, Murf AI.
-6. Retry Canva later — Canvassador program currently closed.
-7. Still need to check: Pictory AI (no program found yet).
-8. Rewrite Notion AI and Flux AI pricing sections to reflect their real pricing model (not just a number fix).
-9. Investigate why compare/best pages aren't ranking — thin content vs real backlinks needed.
-10. Fix 4x 404 + 2x duplicate-canonical pages flagged by GSC.
-11. T2: User reviews/ratings (UGC) — after AdSense approval
-12. T3: Backlinks / Arabic community outreach (Telegram + X)
-13. T7: Cloudflare KV for live exchange rates (fallback static rates in use now)
-14. T8: Pagination on `/tools` page (needed at 100+ tools)
-15. T4: Public read API for Arabic devs (Phase 3, 500+ tools)
-16. T5: Historical price tracking (Phase 3, 3+ months data)
-17. T6: Move to Vercel Pro / Railway for ISR at 5000+ pages
+1. **Waiting on Google:** AdSense manual review decision (email notification).
+2. **Waiting on Adobe:** campaign request submitted via Partnerize, awaiting approval.
+3. Do Credibility Tasks (see above) — needed before any PartnerStack reapplication.
+4. Wait on approvals: Grammarly (Impact.com), Writesonic — fill `affiliate_url` once approved.
+5. Wait on HeyGen email reply (`affiliates@heygen.com`).
+6. After credibility tasks + domain age improve: reapply once to PartnerStack Network — unlocks QuillBot, Descript, Murf AI.
+7. Retry Canva later — Canvassador program currently closed.
+8. Still need to check: Pictory AI (no program found yet).
+9. Rewrite Notion AI and Flux AI pricing sections to reflect their real pricing model (not just a number fix).
+10. Real backlinks / Arabic community outreach — still the core traffic bottleneck (avg GSC position 37.8), content fix alone won't solve ranking.
+11. Fix 4x 404 + 2x duplicate-canonical pages flagged by GSC (URLs not yet identified — need user to pull them from Search Console).
+12. T2: User reviews/ratings (UGC) — after AdSense approval
+13. T3: Backlinks / Arabic community outreach (Telegram + X)
+14. T7: Cloudflare KV for live exchange rates (fallback static rates in use now)
+15. T8: Pagination on `/tools` page (needed at 100+ tools)
+16. T4: Public read API for Arabic devs (Phase 3, 500+ tools)
+17. T5: Historical price tracking (Phase 3, 3+ months data)
+18. T6: Move to Vercel Pro / Railway for ISR at 5000+ pages
