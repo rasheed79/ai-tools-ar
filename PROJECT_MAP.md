@@ -45,8 +45,11 @@
   - **HeyGen — blocked**, official affiliate program was merged into "Social Creator Program" requiring 5K+ social followers (doesn't fit an SEO/content site). Emailed `affiliates@heygen.com` directly requesting website-affiliate access instead of retrying the form.
   - **Rytr — ✅ live**, instant approval (no review), `affiliate_url` set to `https://rytr.me?via=abdulrashid-abdulkarim`, 30% commission.
   - **Writesonic — pending**, applied via `affiliates.writesonic.com`, awaiting approval.
-  - Found real affiliate program links (not yet applied) for: RunwayML (`affiliates.runwayml.com`, 20% recurring via Awin), Synthesia (`synthesia.getrewardful.com/signup`, 25% first 12mo), Adobe Firefly (via Adobe's general Partnerize-based affiliate program, not Firefly-specific).
+  - **Synthesia — ✅ live**, instant approval, `affiliate_url` set to `https://www.synthesia.io?via=abdulrashid`, 25% first 12mo.
+  - **RunwayML — no public affiliate program.** `affiliates.runwayml.com` is invite-only (login for existing affiliates, not a signup form). Confirmed "Not an Affiliate" when logging in. Don't retry — no self-serve application exists as of 2026-07.
+  - Adobe Firefly: general Adobe Partnerize-based affiliate program found, not yet applied.
   - Note: anon Supabase key *can* UPDATE `tools` rows via REST (RLS allows it), just not DELETE — no need for SQL editor to set affiliate_url going forward, only for deletes.
+  - **Created `contact@daleel-adawat.com`** via Cloudflare Email Routing (forwards to gmail), confirmed working — needed for affiliate forms that reject gmail.com addresses (e.g. Synthesia).
   - **Canva — Canvassador program currently closed** for new applications, can't join right now.
   - **PartnerStack Network application — declined** ("Business could not be verified as genuine"). Blocks QuillBot/Descript/Murf AI from ever activating until re-approved. ElevenLabs unaffected (was active before decline). Root causes: domain too new (created June 2026), no business registration on file, LinkedIn is a personal profile not a company page, thin `/about` page. Don't mass-reapply — fix credibility signals first (see Credibility Tasks below), wait 1-2 months for domain age, then reapply once.
 
@@ -70,7 +73,7 @@ Confirmed correct, no change: ChatGPT, Claude, Cursor, DALL-E 3, Descript, Gemin
 Flagged, needs content rewrite (not just a number): **Notion AI** — standalone AI add-on was discontinued; AI now bundled into Business plan ($20/seat), Plus ($10/seat) only gives a trial. **Flux AI** — Black Forest Labs has no official monthly subscription, it's pay-per-image; the $10/mo figure doesn't reflect their real pricing model.
 
 ## Pending — priority order
-1. Apply directly on vendor sites (unaffected by PartnerStack decline): RunwayML, Synthesia, Adobe Firefly.
+1. Apply directly on Adobe Firefly's general affiliate program (unaffected by PartnerStack decline).
 2. Do Credibility Tasks (see above) — needed before any PartnerStack reapplication.
 3. Wait on approvals: Grammarly (Impact.com), Writesonic — fill `affiliate_url` once approved.
 4. Wait on HeyGen email reply (`affiliates@heygen.com`).
