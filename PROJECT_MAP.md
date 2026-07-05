@@ -40,8 +40,11 @@
   - **Jasper AI, Copy.ai — dead**, programs discontinued, do not retry.
   - **Grammarly — pending**, Impact.com account + tax info + profile + site verification all done, waiting on approval.
   - **QuillBot — pending**, applied via PartnerStack (quillbot.com/affiliates), awaiting approval.
-  - **Descript — on hold**, applied via PartnerStack marketplace, blocked on PartnerStack Network application approval (was previously declined once, re-applied).
-  - No affiliate program found in PartnerStack marketplace for: Writesonic, Rytr, Canva AI, Adobe Firefly, RunwayML, Synthesia, HeyGen, Pictory AI, Murf AI — check each vendor's own site directly (Impact.com/FirstPromoter/etc) next.
+  - **Descript — on hold**, applied via PartnerStack marketplace, blocked on PartnerStack Network application approval (was previously declined once, re-applied — profile now 94%+ complete to improve odds).
+  - **Murf AI — on hold**, found on PartnerStack marketplace, applied, same Network approval block as Descript.
+  - **HeyGen — blocked**, official affiliate program was merged into "Social Creator Program" requiring 5K+ social followers (doesn't fit an SEO/content site). Emailed `affiliates@heygen.com` directly requesting website-affiliate access instead of retrying the form.
+  - Found real affiliate program links (not yet applied) for: Writesonic (`affiliates.writesonic.com`, 30% recurring), Rytr (`affiliates.rytr.me/signup`, 30% recurring 12mo), RunwayML (`affiliates.runwayml.com`, 20% recurring via Awin), Synthesia (`synthesia.getrewardful.com/signup`, 25% first 12mo), Adobe Firefly (via Adobe's general Partnerize-based affiliate program, not Firefly-specific).
+  - **Canva — Canvassador program currently closed** for new applications, can't join right now.
 
 ## Pricing Audit 2026-07-05 (all 34 tools checked against official pricing pages)
 Fixed (`price_from` was wrong):
@@ -57,15 +60,18 @@ Confirmed correct, no change: ChatGPT, Claude, Cursor, DALL-E 3, Descript, Gemin
 Flagged, needs content rewrite (not just a number): **Notion AI** — standalone AI add-on was discontinued; AI now bundled into Business plan ($20/seat), Plus ($10/seat) only gives a trial. **Flux AI** — Black Forest Labs has no official monthly subscription, it's pay-per-image; the $10/mo figure doesn't reflect their real pricing model.
 
 ## Pending — priority order
-1. Wait on Grammarly, QuillBot, Descript, and PartnerStack Network application approvals — fill `affiliate_url` for each once approved.
-2. Check official sites directly for affiliate programs: Writesonic, Rytr, Canva AI, Adobe Firefly, RunwayML, Synthesia, HeyGen, Pictory AI, Murf AI.
-3. Rewrite Notion AI and Flux AI pricing sections to reflect their real pricing model (not just a number fix).
-4. Investigate why compare/best pages aren't ranking — thin content vs real backlinks needed.
-5. Fix 4x 404 + 2x duplicate-canonical pages flagged by GSC.
-6. T2: User reviews/ratings (UGC) — after AdSense approval
-7. T3: Backlinks / Arabic community outreach (Telegram + X)
-8. T7: Cloudflare KV for live exchange rates (fallback static rates in use now)
-9. T8: Pagination on `/tools` page (needed at 100+ tools)
-10. T4: Public read API for Arabic devs (Phase 3, 500+ tools)
-11. T5: Historical price tracking (Phase 3, 3+ months data)
-12. T6: Move to Vercel Pro / Railway for ISR at 5000+ pages
+1. Wait on approvals: Grammarly (Impact.com), QuillBot/Descript/Murf AI (PartnerStack Network) — fill `affiliate_url` for each once approved.
+2. Wait on HeyGen email reply (`affiliates@heygen.com`).
+3. Apply directly on vendor sites: Writesonic, Rytr, RunwayML, Synthesia, Adobe Firefly (links found, not yet applied).
+4. Retry Canva later — Canvassador program currently closed.
+5. Still need to check: Pictory AI (no program found yet).
+6. Rewrite Notion AI and Flux AI pricing sections to reflect their real pricing model (not just a number fix).
+7. Investigate why compare/best pages aren't ranking — thin content vs real backlinks needed.
+8. Fix 4x 404 + 2x duplicate-canonical pages flagged by GSC.
+9. T2: User reviews/ratings (UGC) — after AdSense approval
+10. T3: Backlinks / Arabic community outreach (Telegram + X)
+11. T7: Cloudflare KV for live exchange rates (fallback static rates in use now)
+12. T8: Pagination on `/tools` page (needed at 100+ tools)
+13. T4: Public read API for Arabic devs (Phase 3, 500+ tools)
+14. T5: Historical price tracking (Phase 3, 3+ months data)
+15. T6: Move to Vercel Pro / Railway for ISR at 5000+ pages
