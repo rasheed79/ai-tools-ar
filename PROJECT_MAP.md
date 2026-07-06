@@ -95,7 +95,7 @@ Flagged, needs content rewrite (not just a number): **Notion AI** — standalone
 8. Still need to check: Pictory AI (no program found yet).
 9. Rewrite Notion AI and Flux AI pricing sections to reflect their real pricing model (not just a number fix).
 10. Real backlinks / Arabic community outreach — still the core traffic bottleneck (avg GSC position 37.8), content fix alone won't solve ranking. Posting schedule + full post text: `scripts/outreach-posts.md` and dashboard.
-   - **2026-07-06 status:** r/Saudi is dead (Restricted, 20 weekly visitors) — skip it, try r/SaudiArabia instead. r/arabs mods **declined** the promotion request outright ("للأسف كل أنواع الدعايات ممنوعة" — all forms of promotion are banned) — don't retry there, cross it off entirely. Twitter/Telegram/Hasoub/Facebook not started yet — text ready in `scripts/outreach-posts.md`. Resume tomorrow with Twitter (no approval needed).
+   - **2026-07-06 status:** r/Saudi is dead (Restricted, 20 weekly visitors). r/arabs mods **declined** the promotion request outright — don't retry there. **✅ Posted successfully to r/saudiarabia** (81K weekly visitors, active) — text-post format, "Discussion" flair, rewritten as a discussion/question (not a raw link-drop) to satisfy their "Blogspam is not allowed" rule. Live post has 1 upvote so far. Twitter/Telegram/Hasoub/Facebook not started yet — text ready in `scripts/outreach-posts.md`. Resume tomorrow with Twitter.
 11. GSC 404 + duplicate-canonical — fixed in code (2026-07-06), needs "Validate Fix" click + wait for Google to confirm (~1 week).
 12. T2: User reviews/ratings (UGC) — after AdSense approval
 13. T3: Backlinks / Arabic community outreach (Telegram + X)
