@@ -87,6 +87,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a href="/privacy" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontFamily: "'Cairo', sans-serif", fontSize: 13 }}>سياسة الخصوصية</a>
             <a href="/tools" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontFamily: "'Cairo', sans-serif", fontSize: 13 }}>جميع الأدوات</a>
           </div>
+          <div style={{ marginTop: 12, display: 'flex', gap: 16, justifyContent: 'center' }}>
+            <a href="https://www.aitoolzdir.com" target="_blank" rel="noopener" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontFamily: "'Cairo', sans-serif", fontSize: 11 }}>AI Toolz Dir</a>
+            <a href="https://dofollow.tools" target="_blank" rel="noopener" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontFamily: "'Cairo', sans-serif", fontSize: 11 }}>Featured on Dofollow.Tools</a>
+          </div>
         </footer>
       </body>
     </html>
