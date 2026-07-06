@@ -38,7 +38,7 @@
 - Affiliate program status:
   - **ElevenLabs — ✅ live**, `affiliate_url` already set (`try.elevenlabs.io/quowwx3u0oeu`), confirmed via PartnerStack.
   - **Jasper AI, Copy.ai — dead**, programs discontinued, do not retry.
-  - **Grammarly — pending**, Impact.com account + tax info + profile + site verification all done, waiting on approval.
+  - **Grammarly — ❌ declined** (2026-07-06 email): "account did not meet the application criteria and was auto-rejected." Same likely root cause as PartnerStack decline (new domain, no business registration/LinkedIn company page). Don't retry until Credibility Tasks are done + domain age improves.
   - **QuillBot — pending**, applied via PartnerStack (quillbot.com/affiliates), awaiting approval.
   - **Descript — on hold**, applied via PartnerStack marketplace, blocked on PartnerStack Network application approval (was previously declined once, re-applied — profile now 94%+ complete to improve odds).
   - **Murf AI — on hold**, found on PartnerStack marketplace, applied, same Network approval block as Descript.
@@ -88,7 +88,7 @@ Flagged, needs content rewrite (not just a number): **Notion AI** — standalone
 1. **Waiting on Google:** AdSense manual review decision (email notification).
 2. **Waiting on Adobe:** campaign request submitted via Partnerize, awaiting approval.
 3. Do Credibility Tasks (see above) — needed before any PartnerStack reapplication.
-4. Wait on approvals: Grammarly (Impact.com), Writesonic — fill `affiliate_url` once approved.
+4. Wait on approval: Writesonic. (Grammarly declined 2026-07-06 — see above, don't retry yet.)
 5. Wait on HeyGen email reply (`affiliates@heygen.com`).
 6. After credibility tasks + domain age improve: reapply once to PartnerStack Network — unlocks QuillBot, Descript, Murf AI.
 7. Retry Canva later — Canvassador program currently closed.
