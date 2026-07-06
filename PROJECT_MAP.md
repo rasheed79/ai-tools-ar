@@ -1,3 +1,6 @@
+## ⚠️ gstack checkpoint slug
+هذا المشروع slug الصحيح = `rasheed79-ai-tools-ar` (مبني من GitHub remote)، **مو** `ai-tools-ar`. لو تسوي /context-save أو تفتش عن checkpoints يدوياً، لا تكتب المسار يدوي — استخدم `eval "$(~/.claude/skills/gstack/bin/gstack-slug)"` من داخل مجلد المشروع دايماً. غلطة سابقة حطت ملفات بمجلد `ai-tools-ar` الخاطئ، انصلحت بنقلها لـ`rasheed79-ai-tools-ar/checkpoints/`.
+
 ## Stack
 - **Framework:** Next.js 16 (App Router, TypeScript)
 - **Deploy:** Cloudflare Pages via `@opennextjs/cloudflare` + Wrangler 4
