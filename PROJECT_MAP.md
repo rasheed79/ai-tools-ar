@@ -84,6 +84,26 @@ Flagged, needs content rewrite (not just a number): **Notion AI** — standalone
 - **GSC duplicate-canonical fix:** site had zero `<link rel="canonical">` tags anywhere. Added `metadataBase` to root layout + explicit `alternates.canonical` on `/` and `/tools` (the two flagged URLs were `http://.../` and `/tools?category=code`).
 - **Follow-up reminder — check back in ~1 week (around 2026-07-13):** click "Validate Fix" in GSC for both the 404 and duplicate-canonical reports, confirm they clear. Also check: AdSense decision email, Adobe Partnerize approval, Grammarly/Writesonic approvals, and whether any outreach posts (see below) got engagement.
 
+## AI directory submissions (2026-07-06) — backlink strategy from research
+Researched why the site isn't ranking (avg position 37.8): domain is <1 month old
+(June 2026), and Google's own advocate (John Mueller) confirms new domains need
+3-6 months minimum to accumulate trust signals regardless of content quality —
+not a fixable-overnight problem. Manual social posting (Reddit/X) drives instant
+traffic but doesn't build authority. Real backlink strategy: submit to AI tool
+aggregator directories (same-niche authoritative sites) + pitch Arabic tech media.
+- **Futurepedia: skip — costs $247-497, not free** (corrected earlier wrong info).
+- **✅ Submitted to FutureTools.io** (futuretools.io) — free, editorial review by
+  site owner Matt Wolfe pending.
+- **Still to submit** (free, found via research): Toolify, There's An AI For That
+  (TAAFT — 403'd on fetch, try direct), AIxploria. Full list:
+  https://github.com/best-of-ai/ai-directories
+- **Still to pitch**: aitnews.com (البوابة التقنية) and MAGNiTT — real Arabic tech
+  media, short pitch about the directory launch (see chat for research/reasoning).
+- **Paid backlinks verdict**: skip cheap ($<100) backlink services — research
+  confirms these are link-farm risk, can actively hurt rankings. Small-budget
+  paid Arabic articles (~$10-50, performance-gated e.g. TriDent) are lower-risk
+  if tried, but not yet attempted.
+
 ## Pending — priority order
 1. **Waiting on Google:** AdSense manual review decision (email notification).
 2. **Waiting on Adobe:** campaign request submitted via Partnerize, awaiting approval.
@@ -95,6 +115,7 @@ Flagged, needs content rewrite (not just a number): **Notion AI** — standalone
 8. Still need to check: Pictory AI (no program found yet).
 9. Rewrite Notion AI and Flux AI pricing sections to reflect their real pricing model (not just a number fix).
 10. Real backlinks / Arabic community outreach — still the core traffic bottleneck (avg GSC position 37.8), content fix alone won't solve ranking. Posting schedule + full post text: `scripts/outreach-posts.md` and dashboard.
+   - Submit to remaining free AI directories (Toolify, TAAFT, AIxploria) and pitch aitnews.com/MAGNiTT — see "AI directory submissions" section above.
    - **2026-07-06 status:** r/Saudi is dead (Restricted, 20 weekly visitors). r/arabs mods **declined** the promotion request outright — don't retry there. **✅ Posted successfully to r/saudiarabia** (81K weekly visitors, active) — text-post format, "Discussion" flair, rewritten as a discussion/question (not a raw link-drop) to satisfy their "Blogspam is not allowed" rule. Live post has 1 upvote so far. **✅ Posted the X/Twitter thread** (@Abo_Omr_jamali) — 4 tweets, link + hashtags on the last tweet only (X suppresses reach on tweets with external links, so kept the link off tweet 1). Telegram/Hasoub/Facebook not started yet — text ready in `scripts/outreach-posts.md`.
 11. GSC 404 + duplicate-canonical — fixed in code (2026-07-06), needs "Validate Fix" click + wait for Google to confirm (~1 week).
 12. T2: User reviews/ratings (UGC) — after AdSense approval
