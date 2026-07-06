@@ -94,9 +94,11 @@ aggregator directories (same-niche authoritative sites) + pitch Arabic tech medi
 - **Futurepedia: skip — costs $247-497, not free** (corrected earlier wrong info).
 - **✅ Submitted to FutureTools.io** (futuretools.io) — free, editorial review by
   site owner Matt Wolfe pending.
-- **Still to submit** (free, found via research): Toolify, There's An AI For That
-  (TAAFT — 403'd on fetch, try direct), AIxploria. Full list:
-  https://github.com/best-of-ai/ai-directories
+- **Corrected again after live verification:** Toolify ($99), TAAFT ($49-347, needs Google login), AIxploria ($79+, links are nofollow — confirmed on their own FAQ, paying wouldn't even help SEO) are ALL paid. Skip all three.
+- **✅ Submitted to AI Toolz Dir** (DR 63, aitoolzdir.com) — free tier, requires reciprocal footer backlink (added, see below), pending manual review (~48h).
+- **Attempted Dofollow.Tools** (dofollow.tools, free tier requires reciprocal footer backlink, added same as above) — site was down/timing out during submission (2026-07-06), retry later. 750 tools listed, active Discord, looks legit.
+- Added reciprocal footer links on daleel-adawat.com (`src/app/layout.tsx`) for both AI Toolz Dir and Dofollow.Tools to satisfy their free-tier backlink requirement.
+- Full directory list (for future submissions): https://github.com/best-of-ai/ai-directories — verify each one live before trusting "free" claims; most name-brand ones are now paid in 2026.
 - **Still to pitch**: aitnews.com (البوابة التقنية) and MAGNiTT — real Arabic tech
   media, short pitch about the directory launch (see chat for research/reasoning).
 - **Paid backlinks verdict**: skip cheap ($<100) backlink services — research
